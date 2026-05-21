@@ -2,17 +2,24 @@ import { useNavigate } from 'react-router-dom'
 import './Login.css'
 import MakiLogo from '../../assets/MAKI.png'
 import helloDaddyAudio from '../../assets/hello-daddy-sound-effect-made-with-Voicemod.mp3'
-import {useState} from "react";
+import hehe from '../../assets/michael-jackson-hee-hee.mp3'
+import shamone from '../../assets/bad-shamone.mp3'
+import {useEffect, useState} from "react";
 import {BASE_URL} from "../../config.js";
 
 export function Login(){
     const navigate = useNavigate();
 
+    useEffect(() => {
+        const audio1 = new Audio(hehe);
+        audio1.play();
+    },[]);
+
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
 
     const successHandleLogin = () => {
-        const audio = new Audio(helloDaddyAudio);
+        const audio = new Audio(shamone);
         audio.play();
         navigate("/journal");
     }
@@ -53,6 +60,8 @@ export function Login(){
     const handleRegister = () => {
         navigate("/register");
     }
+
+
 
     return(
         <div className="login-container">

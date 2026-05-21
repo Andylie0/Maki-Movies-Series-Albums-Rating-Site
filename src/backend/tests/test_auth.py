@@ -39,8 +39,6 @@ def setup_database():
     Base.metadata.drop_all(bind=engine)
 
 
-# --- THE AUTH REGISTRATION TESTS ---
-
 def test_register_user_success():
     payload = {"username": "testuser", "password": "securepassword123"}
     response = client.post("/auth/register", json=payload)
