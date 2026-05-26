@@ -13,7 +13,7 @@ ALGORITHM = "HS256"
 SESSION_EXPIRY_MINUTES = 30
 RESET_EXPIRY_MINUTES = 15
 
-REDIS_URL = os.environ.get("REDIS")
+REDIS_URL = os.environ.get("REDIS_URL")
 redis_client = redis.Redis.from_url(REDIS_URL, decode_responses=True)
 
 
