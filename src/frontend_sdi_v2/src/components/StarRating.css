@@ -1,0 +1,40 @@
+.star-rating {
+    display: inline-flex;
+    align-items: center;
+    color: #EF881A;
+    line-height: 1;
+}
+
+.star-rating--sm {
+    font-size: 16px;
+}
+
+.star-rating--md {
+    font-size: 20px;
+}
+
+.star-rating--lg {
+    font-size: 28px;
+}
+
+.star-rating__star {
+    display: inline-block;
+}
+
+.star-rating__star--half {
+    position: relative;
+    display: inline-block;
+}
+
+.star-rating__half-bg,
+.star-rating__half-fg {
+    display: inline-block;
+}
+
+.star-rating__half-fg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    overflow: hidden;
+}

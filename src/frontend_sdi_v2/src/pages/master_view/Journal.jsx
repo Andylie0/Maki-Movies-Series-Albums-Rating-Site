@@ -7,6 +7,9 @@ import ParticlesBackground from './Particles.jsx'
 import {useNavigate} from "react-router-dom"
 import Cookie from 'js-cookie'
 import {BASE_URL, WB_URL} from "../../config.js";
+import StarRating from '../../components/StarRating.jsx';
+import { parseRating } from '../../utils/rating.js';
+import { FiEdit2, FiX, FiSearch } from 'react-icons/fi';
 
 export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQueue}){
     const storedUser = JSON.parse(localStorage.getItem('user')) || null;
@@ -176,7 +179,7 @@ export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQ
         const payload = {
             movie_id: parseInt(mId), // Ensure it's a number
             text: text,
-            rating: parseFloat(rating),
+            rating: parseRating(rating),
             likes: selectedReview.likes || 0,
         };
 
@@ -248,18 +251,6 @@ export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQ
         }
     }
 
-    // for stars rating
-    function stars(rating){
-        let result = "";
-        for (let i = 0; i < 5; i++) {
-            if (i === Math.floor(rating) && rating - Math.floor(rating) >= 0.5)
-                result += "⯪";
-            else
-                i < rating ? result += "★" : result += "☆";
-        }
-        return result;
-    }
-
     function handleWatchlist(){
         navigate("/watchlist");
     }
@@ -289,7 +280,9 @@ export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQ
                         onChange={(e) => setSearchInput(e.target.value)}
                         onKeyDown={(e) => e.key === 'Enter' && handleSearchNav()}
                     />
-                    <button className="search-icon" onClick={() => handleSearchNav()}>🔍︎</button>
+                    <button className="search-icon" onClick={() => handleSearchNav()} aria-label="Search">
+                        <FiSearch />
+                    </button>
 
                     {suggestions.length > 0 && (
                         <div className="search-dropdown">
@@ -352,9 +345,17 @@ export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQ
                                 </td>
                                 <td>{movie.yearReleased}</td>
                                 <td>{movie.type}</td>
-                                <td className="stars">{stars(review.rating)}</td>
-                                <td> <button className="edit-button" onClick={() => handleEdit(review)}>🖊</button></td>
-                                <td> <button className="delete-button" onClick={() => deleteReview(review.id)}>✖</button></td>
+                                <td className="stars"><StarRating rating={review.rating} size="sm" /></td>
+                                <td>
+                                    <button className="edit-button" onClick={() => handleEdit(review)} aria-label="Edit review">
+                                        <FiEdit2 />
+                                    </button>
+                                </td>
+                                <td>
+                                    <button className="delete-button" onClick={() => deleteReview(review.id)} aria-label="Delete review">
+                                        <FiX />
+                                    </button>
+                                </td>
                             </tr>
                         )
                     })}
@@ -370,7 +371,9 @@ export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQ
                 {isEditing && selectedReview &&(
                     <div className="overlay-modal" onClick={() => setIsEditing(false)}>
                         <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-                            <button className="modal-close" onClick={() => setIsEditing(false)}>✕</button>
+                            <button className="modal-close" onClick={() => setIsEditing(false)} aria-label="Close">
+                                <FiX />
+                            </button>
                             <h2>Edit Review</h2>
                             <div className = "modal-movie-info">
                                 {(() => {
@@ -389,7 +392,7 @@ export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQ
                                                 <p>Rating:
                                                     <input type="number" id="edit-rating" min="0" max="5" step="0.5" lang="en-US" defaultValue={selectedReview.rating}
                                                            onChange={(e) =>
-                                                               setEditRating(parseFloat(e.target.value))}/>
+                                                               setEditRating(parseRating(e.target.value))}/>
                                                     /5 </p>
                                             </div>
                                         </>
