@@ -287,6 +287,12 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
         navigate("/journal");
     }
 
+    function handleWatchlist(){
+        setActivePage("watchlist");
+        Cookie.set('activeTab', "table", { expires: 7 });
+        navigate("/watchlist");
+    }
+
     function handleAbout(){
         navigate("/about");
     }
@@ -342,7 +348,7 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
                 <button className={`journal-button-header ${activePage ==="journal" ? "active" : ""}`}
                         onClick={() => handleJournal()}>Journal</button>
                 <button className={`watchlist-button-header ${activePage === "watchlist" ? "active" : ""}`}
-                        onClick={() => setActivePage("watchlist")}>Watchlist</button>
+                        onClick={() => handleWatchlist()}>Watchlist</button>
                 <img src ={ProfileIcon} alt= "user_icon" className="user-icon"/>
 
             </header>

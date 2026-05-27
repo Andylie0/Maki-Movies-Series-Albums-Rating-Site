@@ -7,21 +7,24 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding-top: 100px;
+    padding-top: 20px; /* Reduced top padding for smaller screens */
+    padding-left: 20px;
+    padding-right: 20px;
     max-width: 800px;
     margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .about-title {
-    font-size: 42px;
+    font-size: 32px; /* Downsized for mobile headers */
     font-weight: 800;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
 }
 
 .about-description {
-    font-size: 24px;
+    font-size: 18px; /* Downsized for better readability on phones */
     font-weight: 300;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .about-description strong {
@@ -41,7 +44,7 @@
 }
 
 .about-text {
-    font-size: 24px;
+    font-size: 18px;
     line-height: 1.5;
     font-weight: 300;
     max-width: 700px;
@@ -49,10 +52,12 @@
 
 .chat-container {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 320px;
-    height: 400px;
+    bottom: 15px;
+    right: 15px;
+    width: calc(100% - 30px);
+    max-width: 340px;
+    height: 380px;
+    max-height: 70vh;
     background: rgba(26, 26, 26, 0.95);
     border: 2px solid rgba(226, 172, 23, 0.4);
     border-radius: 15px;
@@ -65,7 +70,7 @@
 .chat-header {
     background: rgba(33,31,99,0.8);
     color: white;
-    padding: 10px;
+    padding: 12px 10px; /* Slightly taller tap target */
     font-weight: bold;
     text-align: center;
     border-radius: 12px 12px 0 0;
@@ -81,10 +86,11 @@
 }
 
 .chat-bubble {
-    max-width: 80%;
-    padding: 8px 12px;
+    max-width: 85%;
+    padding: 10px 14px;
     border-radius: 12px;
     font-size: 14px;
+    line-height: 1.4;
 }
 
 .chat-bubble.me {
@@ -101,7 +107,7 @@
 
 .chat-user {
     display: block;
-    font-size: 10px;
+    font-size: 11px;
     font-weight: bold;
     margin-bottom: 2px;
     opacity: 0.8;
@@ -111,7 +117,7 @@
     display: flex;
     padding: 10px;
     border-top: 1px solid #333;
-    gap: 5px;
+    gap: 8px;
 }
 
 .chat-input-area input {
@@ -119,8 +125,9 @@
     background: #222;
     border: 1px solid #444;
     color: white;
-    padding: 8px;
-    border-radius: 5px;
+    padding: 10px; /* Larger padding makes it easier to tap on mobile */
+    border-radius: 8px;
+    font-size: 16px; /* CRITICAL: Prevents iOS Safari from auto-zooming when tapping the input */
 }
 
 .chat-input-area button {
@@ -128,9 +135,10 @@
     border: none;
     color: black;
     font-weight: bold;
-    padding: 0 15px;
-    border-radius: 5px;
+    padding: 0 18px;
+    border-radius: 8px;
     cursor: pointer;
+    font-size: 14px;
 }
 
 .admin-button {
@@ -138,16 +146,18 @@
     background-color: #000000;
     color: #00ff41;
     border: 2px solid #00ff41;
-    padding: 12px 28px;
-    font-size: 18px;
+    padding: 10px 22px; /* Tapered padding for better mobile fit */
+    font-size: 16px; /* Scaled down slightly */
     font-weight: 900;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     cursor: pointer;
     overflow: hidden;
     transition: all 0.3s ease;
     box-shadow: 0 0 10px rgba(0, 255, 65, 0.2);
     border-radius: 4px;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .admin-button::before {
@@ -156,7 +166,7 @@
     top: -50px;
     left: -20px;
     width: 200%;
-    font-size: 24px;
+    font-size: 20px;
     color: rgba(0, 255, 65, 0.65);
     white-space: nowrap;
     transform: rotate(-20deg);
@@ -164,14 +174,21 @@
     transition: opacity 0.3s ease;
 }
 
-.admin-button:hover {
-    box-shadow: 0 0 30px rgba(0, 255, 65, 0.8);
-    transform: scale(1.05);
+@media (hover: hover) {
+    .admin-button:hover {
+        box-shadow: 0 0 30px rgba(0, 255, 65, 0.8);
+        transform: scale(1.05);
+    }
+
+    .admin-button:hover::before {
+        opacity: 1;
+        animation: moneyFly 1.5s linear infinite;
+    }
 }
 
-.admin-button:hover::before {
-    opacity: 1;
-    animation: moneyFly 1.5s linear infinite;
+.admin-button:active {
+    transform: scale(0.95);
+    box-shadow: 0 0 20px rgba(0, 255, 65, 0.6);
 }
 
 @keyframes moneyFly {
@@ -183,6 +200,22 @@
     }
 }
 
-.admin-button:active {
-    transform: scale(0.95);
+@media (min-width: 768px) {
+    .about-content {
+        padding-top: 100px;
+    }
+    .about-title {
+        font-size: 42px;
+    }
+    .about-description {
+        font-size: 24px;
+    }
+    .about-text {
+        font-size: 24px;
+    }
+    .admin-button {
+        padding: 12px 28px;
+        font-size: 18px;
+        letter-spacing: 2px;
+    }
 }

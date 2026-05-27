@@ -78,6 +78,12 @@ export default function About({allMovies}) {
         navigate("/journal");
     }
 
+    function handleWatchlist(){
+        setActivePage("watchlist");
+        Cookie.set('activeTab', "table", { expires: 7 });
+        navigate("/watchlist");
+    }
+
     const suggestions = searchInput.length > 0
         ? allMovies.filter(m =>
             m.name.toLowerCase().includes(searchInput.toLowerCase())
@@ -116,7 +122,7 @@ export default function About({allMovies}) {
                 <button className={`journal-button-header ${activePage ==="journal" ? "active" : ""}`}
                         onClick={() => handleJournal()}>Journal</button>
                 <button className={`watchlist-button-header ${activePage === "watchlist" ? "active" : ""}`}
-                        onClick={() => setActivePage("watchlist")}>Watchlist</button>
+                        onClick={() => handleWatchlist()}>Watchlist</button>
                 <img src ={ProfileIcon} alt= "user_icon" className="user-icon"/>
             </header>
 

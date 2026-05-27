@@ -9,6 +9,8 @@ import Cookie from "js-cookie";
 import { ResponsiveContainer } from 'recharts'
 import {BASE_URL} from "../../config.js";
 
+const ALL_RATINGS = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
+
 export default function Statistics({allReviews, allMovies}) {
     const nav = useNavigate();
     const [activePage, setActivePage] = useState("journal")
@@ -40,6 +42,14 @@ export default function Statistics({allReviews, allMovies}) {
         };
         fetchStats();
     }, []);
+
+    const paddedRatingDistribution = ALL_RATINGS.map(rating => {
+       const existingData =  statsData.rating_distribution.find(d => d.rating === rating);
+       return {
+           rating: rating,
+           count: existingData ? existingData.count : 0
+       }
+    });
 
     const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
@@ -136,7 +146,7 @@ export default function Statistics({allReviews, allMovies}) {
                     <div className="bar-chart-wrapper">
                         <span className="star-label">★</span>
                         <ResponsiveContainer width="100%" height={250}>
-                            <BarChart data={statsData.rating_distribution} margin={{ top: 20, right: 0, left: 0, bottom: 10 }}>
+                            <BarChart data={paddedRatingDistribution} margin={{ top: 20, right: 0, left: 0, bottom: 10 }}>
                                 <XAxis dataKey="rating" axisLine={{ stroke: '#ffffff', strokeWidth : 2}} tickLine={false} tick={false}/>
                                 <YAxis hide={true} />
                                 <Tooltip />

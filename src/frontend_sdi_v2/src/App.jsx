@@ -11,7 +11,7 @@ import Dashboard from './pages/dashboard/Dashboard.jsx'
 import {useState, useEffect} from "react";
 import {BASE_URL} from "./config.js";
 import NextStep from "./pages/authentification/NextStep.jsx";
-
+import Watchlist from "./pages/watchlist/Watchlist.jsx";
 
 export function App() {
     const [allReviews, setReviewState] = useState([]);
@@ -79,6 +79,9 @@ export function App() {
                 <Route path="/about" element={<About
                     allMovies={allMovies}
                 />}/>
+                <Route path="/watchlist" element={<Watchlist
+                    allMovies={allMovies}
+                />} />
                 <Route path="/dashboard" element={<Dashboard />}/>
                 <Route path="/forgot-password" element={<ForgotPassword/>}/>
                 <Route path="/next-step" element={<NextStep/>}/>

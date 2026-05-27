@@ -1,0 +1,66 @@
+.watchlist-content{
+    display: flex;
+    position: relative;
+    width: 100%;
+    height: 90vh;
+    overflow: hidden;
+}
+
+.first-square{
+    flex:1;
+    background-color: rgba(255, 192, 203, 0.8);
+    animation: expandRight 5s ease-in-out infinite alternate;
+}
+
+.nothing-implementedlolol{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centers the text perfectly over the seam */
+    z-index: 10; /* Keeps it physically ahead/on top of the squares */
+    margin: 0;
+    white-space: nowrap; /* Prevents text splitting awkwardly on small screens */
+    font-size: 42px; /* Adjustable fallback text size */
+    font-weight: 900;
+
+    background: linear-gradient(45deg, #211F63CC, #c89c0a ,#6e915b);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 5s linear infinite;
+}
+@keyframes shine {
+    to { background-position: 200% center; }
+}
+
+@keyframes expandRight {
+    0% {
+        flex-grow: 1;
+    }
+    40%, 60% {
+        /* Holds at 100% width for a beat so the screen is completely pink */
+        flex-grow: 999;
+    }
+    100% {
+        flex-grow: 1;
+    }
+}
+
+.second-square{
+    flex: 1;
+    background-color: rgba(0, 255, 255, 0.55);
+    animation: expandLeft 4s ease-in-out infinite alternate;
+}
+
+@keyframes expandLeft {
+    0% {
+        flex-grow: 1;
+    }
+    40%, 60% {
+        /* Holds at 100% width for a beat so the screen is completely pink */
+        flex-grow: 999;
+    }
+    100% {
+        flex-grow: 1;
+    }
+}

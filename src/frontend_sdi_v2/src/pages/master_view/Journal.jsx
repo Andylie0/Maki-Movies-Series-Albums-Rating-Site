@@ -180,7 +180,7 @@ export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQ
             likes: selectedReview.likes || 0,
         };
 
-        if(payload.rating <= 0 || payload.rating > 5 && payload.rating % 0.5 !== 0){
+        if(payload.rating <= 0 || payload.rating > 5 || payload.rating % 0.5 !== 0){
             console.error("Invalid rating value:", payload.rating);
             return;
         }
@@ -260,6 +260,10 @@ export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQ
         return result;
     }
 
+    function handleWatchlist(){
+        navigate("/watchlist");
+    }
+
     function handleTabChange(tab){
         setActiveTab(tab);
         Cookie.set('activeTab', tab, { expires: 7 });
@@ -309,7 +313,7 @@ export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQ
                 <button className={`journal-button-header ${activePage ==="journal" ? "active" : ""}`}
                         onClick={() => setActivePage("journal")}>Journal</button>
                 <button className={`watchlist-button-header ${activePage === "watchlist" ? "active" : ""}`}
-                        onClick={() => setActivePage("watchlist")}>Watchlist</button>
+                        onClick={() => {setActivePage("watchlist"); handleWatchlist();}}>Watchlist</button>
                 <img src ={imageUser != "null" ? imageUser : ProfileIcon} alt= "user_icon" className="user-icon"/>
             </header>
 
@@ -346,7 +350,7 @@ export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQ
                                          alt = {movie.name} className="movie-poster" onClick={() => handlePoster(movie)}/>
                                     {movie.name}
                                 </td>
-                                <td>{movie.year_released}</td>
+                                <td>{movie.yearReleased}</td>
                                 <td>{movie.type}</td>
                                 <td className="stars">{stars(review.rating)}</td>
                                 <td> <button className="edit-button" onClick={() => handleEdit(review)}>🖊</button></td>
