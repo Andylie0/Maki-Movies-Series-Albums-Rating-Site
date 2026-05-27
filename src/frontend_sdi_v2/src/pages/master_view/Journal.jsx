@@ -387,7 +387,7 @@ export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQ
                                                           onChange={(e) => setEditText(e.target.value)}
                                                 />
                                                 <p>Rating:
-                                                    <input type="number" id="edit-rating" min="0" max="5" step="0.5" defaultValue={selectedReview.rating}
+                                                    <input type="number" id="edit-rating" min="0" max="5" step="0.5" lang="en-US" defaultValue={selectedReview.rating}
                                                            onChange={(e) =>
                                                                setEditRating(parseFloat(e.target.value))}/>
                                                     /5 </p>
