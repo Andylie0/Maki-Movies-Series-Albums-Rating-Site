@@ -180,6 +180,11 @@ export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQ
             likes: selectedReview.likes || 0,
         };
 
+        if(payload.rating <= 0 || payload.rating > 5 && payload.rating % 0.5 !== 0){
+            console.error("Invalid rating value:", payload.rating);
+            return;
+        }
+
         if (!isOnline) {
             addToQueue({
                 url: `/reviews/${selectedReview.id}?user_id=${userId}`,

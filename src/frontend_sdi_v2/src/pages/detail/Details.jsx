@@ -189,6 +189,11 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
             likes: selectedReview.likes || 0,
         };
 
+        if(payload.rating <= 0 || payload.rating > 5 && payload.rating % 0.5 !== 0){
+            console.error("Invalid rating value:", payload.rating);
+            return;
+        }
+
         if (!isOnline) {
             addToQueue({
                 url: `/reviews/${selectedReview.id}?user_id=${userId}`,
@@ -233,6 +238,11 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
             rating: parseFloat(rating),
             likes: 0,
         };
+
+        if(payload.rating <= 0 || payload.rating > 5 && payload.rating % 0.5 !== 0){
+            console.error("Invalid rating value:", payload.rating);
+            return;
+        }
 
         if (!isOnline) {
             const tempId = Date.now();
