@@ -5,6 +5,7 @@ import FWEH from "../../assets/FWEH.png";
 import hidoina from "../../assets/hidoina.png";
 import {useState, useEffect} from "react";
 import './Details.css'
+import '../master_view/Journal.css'
 import Cookie from 'js-cookie'
 import {BASE_URL, WB_URL} from "../../config.js";
 import StarRating from '../../components/StarRating.jsx';
@@ -371,7 +372,7 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
                     </div>
                     <div className="rate-watchlist">
                         <div className="rating-section">
-                            <StarRating rating={movie.rating} size="lg" />
+                            <span className="details-hero-star" aria-hidden="true">★</span>
                             <div className="stats-rate">
                                 <span className="rating-numb">
                                     {movie.rating} / 5</span>
@@ -386,7 +387,7 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
                     <div className="add-review-button"
                          onClick={() => handleAdd(movie.reviews?.find(r => r.userId === parseInt(userId)))}>
                         <span className="add">Add a review or edit your review!</span>
-                        <StarRating rating={5} size="md" />
+                        <StarRating rating={5} size="md" className="add-review-stars" />
                     </div>
                 </div>
 
@@ -472,7 +473,7 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
                                 <p>Fweh! Fujimoto is a serial pdf-file!</p>
                             </div>
                         </div>
-                        <StarRating rating={3.5} size="md" />
+                        <StarRating rating={3.5} size="md" className="review-item-stars" />
                     </div>
                     <hr />
                     <div className="reviewer-2">
@@ -483,7 +484,7 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
                                     <p>Don't you have a human heart!</p>
                                 </div>
                         </div>
-                        <StarRating rating={4} size="md" />
+                        <StarRating rating={4} size="md" className="review-item-stars" />
                     </div>
                     <hr />
                     <span className="all-reviews" onClick={()=>handleAllReviews()}>See all reviews!</span>

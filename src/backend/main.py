@@ -24,6 +24,7 @@ from Controller import sma_controller, review_controller, faker_controller, auth
 from data import matrix_data_sma, matrix_data_review
 from database import get_db, engine, Base, SessionLocal
 
+Base.metadata.create_all(bind=engine)
 db = SessionLocal()
 
 try:
