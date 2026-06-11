@@ -22,4 +22,5 @@ class SMAModel(Base):
     rating = Column(Float, default=0, nullable=False)
 
     reviews = relationship("ReviewModel", back_populates="movie", cascade="all, delete-orphan")
+    watchlist = relationship("WatchlistModel", back_populates="SMA", cascade="all, delete-orphan")
 

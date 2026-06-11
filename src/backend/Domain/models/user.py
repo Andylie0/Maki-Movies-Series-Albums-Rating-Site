@@ -12,5 +12,6 @@ class UserModel(Base):
     image = Column(String(255), nullable=True)
 
     role = Column(String(20), default="user")
+    watchlist = relationship("WatchlistModel", back_populates="user")
     reviews = relationship("ReviewModel", back_populates="author")
     observations = relationship("ObservationModel", back_populates="user", cascade="all, delete-orphan")

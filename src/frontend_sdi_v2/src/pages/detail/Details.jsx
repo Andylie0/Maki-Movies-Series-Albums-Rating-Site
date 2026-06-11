@@ -22,6 +22,8 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
     const userId = storedUser.id;
 
     const navigate = useNavigate();
+    const [isWatchlisted, setWatchlisted] = useState(false);
+    const [watchlist_id, setId] = useState(null);
 
     const [activePage, setActivePage] = useState("")
     const [searchInput, setSearchInput] = useState("");
@@ -157,6 +159,39 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
 
         return () => socket.close();
     }, [id]);
+
+    useEffect(() => {
+        let isMounted = true;
+
+        async function checkWatchlist(){
+            if(!isLoggedIn) return;
+            const response = await fetch(`${BASE_URL}/watchlist/?user_id=${userId}`, {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: "include",
+            })
+            if(response.ok){
+                const watchlist = await response.json();
+                const foundItem = watchlist.find(w => w.user_id === parseInt(userId) && w.movie_id === parseInt(id))
+                if(foundItem){
+                    setWatchlisted(true);
+                    setId(foundItem.id);
+                }
+                else{
+                    setWatchlisted(false);
+                    setId(null);
+                }
+            }
+            else{
+                console.error("Error fetching watchlist:", response.statusText);
+            }
+        }
+        checkWatchlist();
+
+        return () => {
+            isMounted = false;
+        }
+    },[id, userId])
 
     function revrev(m){
         if (m.numberOfReviews >= 1000) {
@@ -342,6 +377,47 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
         );
     }
 
+    async function handleAddWatchlist(){
+        if(!isLoggedIn){
+            setShowPopUp(true);
+            setTriedToChangeTab(true);
+            return;
+        }
+        const response = await fetch(`${BASE_URL}/watchlist/?user_id=${userId}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: "include",
+            body: JSON.stringify({movie_id: parseInt(id)})
+        })
+        if (response.ok) {
+            const data = await response.json();
+            setId(data.id);
+            setWatchlisted(true);
+            alert("Added to watchlist!");
+        } else {
+            const errorData = await response.json();
+            alert(`Error: ${errorData.detail[0].msg}`);
+        }
+    }
+
+    async function handleRemoveWatchlist(){
+        if(!isLoggedIn){
+            setShowPopUp(true);
+            setTriedToChangeTab(true);
+            return;
+        }
+
+        const response = await fetch(`${BASE_URL}/watchlist/${watchlist_id}?user_id=${userId}`, {
+            method: 'DELETE',
+            credentials: "include",
+        })
+        if (response.ok) {
+            setId(null);
+            setWatchlisted(false);
+            alert("Removed from watchlist!");
+        }
+    }
+
     return(
         <div className="details">
 
@@ -378,10 +454,9 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
                         onClick={() => handleJournal()}>Journal</button>
                 <button className={`watchlist-button-header ${activePage === "watchlist" ? "active" : ""}`}
                         onClick={() => handleWatchlist()}>Watchlist</button>
-                {isLoggedIn && (
+                {isLoggedIn ? (
                     <img src ={ProfileIcon} alt= "user_icon" className="user-icon"/>
-                )}
-                {!isLoggedIn && (
+                ) : (
                     <button className="get-started-button" onClick={() => navigate('/login')}>Get Started!</button>
                 )}
 
@@ -407,7 +482,15 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
                                 <span className="reviews">{revrev(movie)} CHADS</span>
                             </div>
                         </div>
-                        <button className="watchlist-button">Add to your watchlist</button>
+                        {isWatchlisted ? (
+                            <button className="watchlist-button" onClick={handleRemoveWatchlist}>
+                                Remove from watchlist
+                            </button>
+                        ) : (
+                            <button className="watchlist-button" onClick={handleAddWatchlist}>
+                                Add to your watchlist
+                            </button>
+                        )}
                     </div>
                 </div>
 

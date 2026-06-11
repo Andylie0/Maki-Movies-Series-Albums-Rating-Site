@@ -10,17 +10,21 @@ from Domain.schema import schema
 from Domain.models.Review import ReviewModel
 from Domain.models.SMA import SMAModel
 from Domain.models.user import UserModel
+from Domain.models.watchlist import WatchlistModel
 from Domain.models.log import LogModel
 from Domain.models.observation import ObservationModel
 from Repository.log_repository import LogRepository
 from Repository.sma_repository import SMARepository
 from Repository.review_repository import ReviewRepository
+from Repository.watchlist_repository import WatchlistRepository
 from Service.faker_service import FakerService
 from Service.log_service import LogService
 from Service.sma_service import SMAService
 from Service.review_service import ReviewService
+from Service.watchlist_service import WatchlistService
 from Service.websocket_manager import ws_manager
-from Controller import sma_controller, review_controller, faker_controller, auth_controller, chat_controller
+from Controller import sma_controller, review_controller, faker_controller, auth_controller, chat_controller, \
+    watchlist_controller
 from data import matrix_data_sma, matrix_data_review
 from database import get_db, engine, Base, SessionLocal
 
@@ -81,10 +85,12 @@ except Exception as e:
 log_repo = LogRepository(db)
 sma_repo = SMARepository(db)
 review_repo = ReviewRepository(db)
+watchlist_repo = WatchlistRepository(db)
 
 log_service = LogService(log_repo)
 sma_service = SMAService(sma_repo, review_repo)
 review_service = ReviewService(review_repo, sma_repo, log_service, ws_manager)
+watchlist_service = WatchlistService(watchlist_repo, log_service, ws_manager)
 faker_service = FakerService(review_service, sma_repo, ws_manager)
 
 async def get_context():
@@ -126,6 +132,7 @@ app.include_router(sma_controller.router)
 app.include_router(review_controller.router)
 app.include_router(auth_controller.router)
 app.include_router(chat_controller.router)
+app.include_router(watchlist_controller.router)
 app.include_router(faker_controller.create_silver_router(faker_service))
 
 if __name__ == '__main__':

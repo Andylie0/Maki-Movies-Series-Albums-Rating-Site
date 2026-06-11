@@ -9,6 +9,7 @@ from Domain.models.SMA import SMAModel
 from Domain.models.Review import ReviewModel
 from Domain.models.user import UserModel
 from Domain.models.log import LogModel
+from Domain.models.watchlist import WatchlistModel
 from Domain.models.observation import ObservationModel
 
 # this is the Alembic Config object, which provides

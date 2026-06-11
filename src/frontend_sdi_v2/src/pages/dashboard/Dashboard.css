@@ -142,6 +142,7 @@
 }
 
 .not-logged-in{
+    z-index:4;
     position:fixed;
     display: flex;
     flex-direction: row;
@@ -150,7 +151,7 @@
     border-radius: 10px;
     padding: 10px;
     margin-top: 10px;
-    margin-left: 70%;
+    margin-left: 70vw;
     font-size: 15px;
     color: white;
     gap: 30px;
@@ -180,8 +181,9 @@
     border:none;
     color: white;
     background: none;
-    font-size: 20px;
+    font-size: 30px;
     padding-top:10px;
+    cursor: pointer;
 }
 
 .ritsu{
@@ -199,6 +201,7 @@
     position: absolute;
     right: 7%;
     top: 15%;
+    z-index: 1;
 }
 
 .laser1{
@@ -209,6 +212,7 @@
     right: 15%;
     top: 25.8%;
     animation: qs 1s alternate infinite;
+    z-index: 1;
 }
 
 @keyframes qs {
@@ -229,6 +233,7 @@
     right: 13%;
     top: 25.8%;
     animation: qs 1s alternate infinite;
+    z-index: 1;
 }
 
 @media screen and (max-width: 768px) {
