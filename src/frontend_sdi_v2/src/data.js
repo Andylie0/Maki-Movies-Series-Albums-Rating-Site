@@ -192,3 +192,37 @@ export const reviews = [
         likes: 0
     },
 ];
+
+export const trivia=[
+    {
+        id: 1,
+        trivia_moment: 'Narcos\' pilot',
+        year: 2015,
+        image: "https://i.pinimg.com/736x/b0/8b/05/b08b054871bd7c9608ac6e52f1efa984.jpg",
+    },
+    {
+        id: 2,
+        trivia_moment: 'Daenerys becomes Dragon Queen',
+        year: 2011,
+        image: "https://upload.wikimedia.org/wikipedia/en/0/0d/Daenerys_Targaryen_with_Dragon-Emilia_Clarke.jpg",
+    },
+    {
+        id: 3,
+        trivia_moment: 'Jamiroquai released hit single "Virtual Insanity" ',
+        year: 1996,
+        image: "https://assets.vogue.com/photos/5a4d421f9856231b9dfa121b/master/w_2240,c_limit/00-story-jamiroquai.jpg",
+    },
+    {
+        id: 4,
+        trivia_moment: 'Ultrakill releases',
+        year: 2020,
+        image: "https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/1229490/header.jpg?t=1779956369",
+    },
+    {
+        id: 5,
+        trivia_moment: 'Beatles sang in the USA for the first time',
+        year: 1023,
+        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/The_Beatles_1963_Dezo_Hoffman_Capitol_Records_press_photo_2.jpg/960px-The_Beatles_1963_Dezo_Hoffman_Capitol_Records_press_photo_2.jpg",
+    },
+
+]

@@ -1,27 +1,19 @@
 import { useNavigate } from 'react-router-dom'
 import './Login.css'
 import MakiLogo from '../../assets/MAKI.png'
-import helloDaddyAudio from '../../assets/hello-daddy-sound-effect-made-with-Voicemod.mp3'
 import hehe from '../../assets/michael-jackson-hee-hee.mp3'
-import shamone from '../../assets/bad-shamone.mp3'
 import {useEffect, useState} from "react";
 import {BASE_URL} from "../../config.js";
 
-export function Login(){
+export function Login({setIsLoggedIn}){
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const audio1 = new Audio(hehe);
-        audio1.play();
-    },[]);
 
     const [password, setPassword] = useState("");
     const [username, setUsername] = useState("");
 
     const successHandleLogin = () => {
-        const audio = new Audio(shamone);
-        audio.play();
-        navigate("/journal");
+        setIsLoggedIn(true);
+        navigate("/");
     }
 
     function handleForgotPassword() {
@@ -66,7 +58,7 @@ export function Login(){
     return(
         <div className="login-container">
             <div className="image-title">
-                <img src = {MakiLogo} alt= "logo_maki" className="logo-maki"/>
+                <img src = {MakiLogo} alt= "logo_maki" className="logo-maki" onClick={() => navigate('/')}/>
                 <h1>Welcome to Maki!</h1>
             </div>
             <div className = "mail-pass-login-combo">

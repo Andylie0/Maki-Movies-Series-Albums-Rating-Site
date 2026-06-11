@@ -1,0 +1,306 @@
+.get-started-button{
+    border: 6px solid rgba(63, 183, 41, 0.20);
+    outline: none;
+    background: rgba(63, 183, 41, 0.86);
+    border-radius: 20px;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.get-started-button:hover{
+    background: rgba(63, 183, 41);
+}
+
+.dashboard-content{
+    display: flex;
+    flex-direction: column;
+}
+
+.trivia{
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+    margin-left: 22%;
+    margin-right: 21%;
+    text-align: center;
+    margin-top: 3%;
+    font-size: 20px;
+    border: 2px solid rgba(33, 31, 99, 0.32);
+    border-radius: 5px;
+    background-color: rgba(33, 31, 99, 0.71);
+}
+
+.trivia p{
+    color: white;
+    font-size: 20px;
+    padding-left: 30px;
+}
+
+.trivia-button{
+    background-color: rgba(63, 183, 41, 0.45);
+    border: none;
+    color: white;
+    padding: 12px 30px;
+    text-align: center;
+    border-radius: 12px;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 10px 2px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.trivia-button:hover{
+    background-color: rgba(63, 183, 41, 0.54);
+}
+
+.arrow{
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    left: 75%;
+    top: 33%;
+}
+
+.ghost1{
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    left: 6%;
+    top: 34%;
+}
+
+.sma-showcase{
+    display: flex;
+    flex-direction:column;
+    margin-left: 23%;
+    margin-top: 5%;
+}
+
+.pop{
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
+}
+
+.line1{
+    margin-top:-10px;
+    width: 72%;
+    height: 2px;
+    background-color: white;
+}
+
+.sma-showcase-grid{
+    margin-top: 1%;
+    display: flex;
+    flex-direction:row;
+    gap: 18px;
+}
+
+.sma-showcase-image{
+    width: 120px;
+    height: 210px;
+    cursor: pointer;
+}
+
+
+.about-chat{
+    margin-top: 3%;
+    margin-left: 45%;
+}
+
+.about-act{
+    border:2pt solid rgba(33, 31, 99, 0.71);
+    background:rgba(33, 31, 99, 0.71);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    color: rgba(255, 255, 255, 0.71);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.chat-act{
+    border:2pt solid rgba(33, 31, 99, 0.71);
+    background:rgba(33, 31, 99, 0.71);
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: rgba(255, 255, 255, 0.71);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.about-act:hover, .chat-act:hover{
+    background:rgba(33, 31, 99, 0.81);
+    color: white;
+}
+
+.about-act.active, .chat-act.active{
+    color: white;
+    background:rgba(33, 31, 99, 1);
+}
+
+.not-logged-in{
+    position:fixed;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgba(255, 84, 84, 0.76);
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-left: 70%;
+    font-size: 15px;
+    color: white;
+    gap: 30px;
+    animation: slideIn 0.2s ease-in-out forwards;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(150%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.suggestive{
+    display: flex;
+    flex-direction: column;
+}
+.suggestive h1{
+    font-size: 20px;
+}
+
+.x-button{
+    border:none;
+    color: white;
+    background: none;
+    font-size: 20px;
+    padding-top:10px;
+}
+
+.ritsu{
+     width: 150px;
+     height: 150px;
+     position: absolute;
+     clip-path: circle(50%);
+     right: 4%;
+     bottom: 25%;
+}
+
+.quentin{
+    width: 250px;
+    height: 150px;
+    position: absolute;
+    right: 7%;
+    top: 15%;
+}
+
+.laser1{
+    width: 100px;
+    rotate: 160deg;
+    border-radius: 10px;
+    position: absolute;
+    right: 15%;
+    top: 25.8%;
+    animation: qs 1s alternate infinite;
+}
+
+@keyframes qs {
+    0%{
+        border: none;
+    }
+    100% {
+        border: 2.5px solid red;
+    }
+}
+
+.laser2{
+    width: 100px;
+    rotate: 160deg;
+    border-radius:10px;
+    border: 2px solid red;
+    position: absolute;
+    right: 13%;
+    top: 25.8%;
+    animation: qs 1s alternate infinite;
+}
+
+@media screen and (max-width: 768px) {
+    .trivia {
+        flex-direction: column;
+        gap: 15px;
+        margin-left: 5%;
+        margin-right: 5%;
+        padding: 15px 10px;
+    }
+
+    .trivia p {
+        padding-left: 0;
+        font-size: 16px;
+    }
+
+    .trivia-button {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px 20px;
+        font-size: 16px;
+    }
+
+    .sma-showcase {
+        margin-left: 5%;
+        margin-right: 5%;
+        margin-top: 8%;
+    }
+
+    .line1 {
+        width: 100%;
+    }
+
+    .sma-showcase-grid {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .sma-showcase-image {
+        width: 90px;
+        height: 158px;
+    }
+
+    .about-chat {
+        margin-left: 0;
+        display: flex;
+        justify-content: center;
+        margin-top: 5%;
+    }
+
+    .about-act, .chat-act {
+        font-size: 16px;
+        padding: 6px 15px;
+    }
+
+    .not-logged-in {
+        margin-left: 5%;
+        margin-right: 5%;
+        left: 0;
+        right: 0;
+        width: auto;
+        font-size: 13px;
+    }
+
+    /* Hide absolute-positioned layout breakers on mobile */
+    .arrow,
+    .ghost1,
+    .ritsu,
+    .quentin,
+    .laser1,
+    .laser2 {
+        display: none;
+    }
+}

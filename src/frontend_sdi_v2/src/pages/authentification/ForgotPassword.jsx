@@ -9,7 +9,7 @@ export default function ForgotPassword() {
     const [username, setUsername] = useState("");
 
     function handleLogin() {
-        navigate('/');
+        navigate('/login');
     }
 
     async function handleNextStep(username) {

@@ -77,8 +77,8 @@ export default function Statistics({allReviews, allMovies}) {
         nav("/journal");
     }
 
-    function handleAbout(){
-        nav("/about");
+    function handleDashboard(){
+        nav("/");
     }
 
     function handleTabChange(tab){
@@ -96,7 +96,7 @@ export default function Statistics({allReviews, allMovies}) {
         <div className="stats">
             <ParticlesBackground colour="#EB4144"/>
             <header className="stats-header">
-                <img src = {MakiLogo} alt= "logo_maki" className="logo-maki" onClick={() => handleAbout()} />
+                <img src = {MakiLogo} alt= "logo_maki" className="logo-maki" onClick={() => handleDashboard()} />
                 <div className="search-bar">
                     <input type="text" placeholder="Search..." className="search-input"
                            onChange={(e) => setSearchInput(e.target.value)}

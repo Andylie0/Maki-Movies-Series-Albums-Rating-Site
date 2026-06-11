@@ -27,8 +27,8 @@ export default function Watchlist({allMovies}){
         navigate("/journal");
     }
 
-    function handleAbout(){
-        navigate("/about");
+    function handleDashboard(){
+        navigate("/");
     }
 
     const suggestions = searchInput.length > 0
@@ -41,7 +41,7 @@ export default function Watchlist({allMovies}){
     return(
         <div className="watchlist-container">
             <header className="app-header">
-                <img src = {MakiLogo} alt= "logo_maki" className="logo-maki" onClick={() => handleAbout()} />
+                <img src = {MakiLogo} alt= "logo_maki" className="logo-maki" onClick={() => handleDashboard()} />
                 <div className="search-bar">
                     <input type="text" placeholder="Search..." className="search-input"
                            onChange={(e) => setSearchInput(e.target.value)}

@@ -11,9 +11,10 @@ import {BASE_URL, WB_URL} from "../../config.js";
 import StarRating from '../../components/StarRating.jsx';
 import { parseRating } from '../../utils/rating.js';
 import { FiSearch, FiX } from 'react-icons/fi';
+import {NotLoggedIn} from "../dashboard/Dashboard.jsx";
 
 
-export default function Details({ allReviews, setReviewState, allMovies, isOnline, addToQueue}) {
+export default function Details({ allReviews, setReviewState, allMovies, isOnline, addToQueue,isLoggedIn}) {
     const {id} = useParams();
     const [movie, setMovie] = useState(null);
 
@@ -30,9 +31,11 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
     const [newReview, setNewReview] = useState(null)
     const [editRating, setEditRating] = useState(0)
     const [editText, setEditText] = useState("")
+    const [showPopUp, setShowPopUp] = useState(true)
+    const [triedToChangeTab, setTriedToChangeTab] = useState(false);
 
     const fetchMovieData = async () => {
-        const MOVIE_DETAILS_QUERY = `
+            const MOVIE_DETAILS_QUERY = `
             query GetMovieDetails($id: Int!) {
                 getMovie(id: $id) {
                     id
@@ -55,27 +58,27 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
             }
         `;
 
-        try {
-            const response = await fetch(`${BASE_URL}/graphql`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                credentials: "include",
-                body: JSON.stringify({
-                    query: MOVIE_DETAILS_QUERY,
-                    variables: { id: parseInt(id) }
-                })
-            });
+            try {
+                const response = await fetch(`${BASE_URL}/graphql`, {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    credentials: "include",
+                    body: JSON.stringify({
+                        query: MOVIE_DETAILS_QUERY,
+                        variables: {id: parseInt(id)}
+                    })
+                });
 
-            const result = await response.json();
-            const movieData = result.data.getMovie;
+                const result = await response.json();
+                const movieData = result.data.getMovie;
 
-            if (movieData) {
-                setMovie(movieData);
-                setReviewState(movieData.reviews);
+                if (movieData) {
+                    setMovie(movieData);
+                    setReviewState(movieData.reviews);
+                }
+            } catch (error) {
+                console.error("GraphQL Details Error:", error);
             }
-        } catch (error) {
-            console.error("GraphQL Details Error:", error);
-        }
     };
 
     useEffect(() => {
@@ -171,6 +174,12 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
     }
 
     function handleAdd(review) {
+        if(!isLoggedIn)
+        {
+            setShowPopUp(true);
+            setTriedToChangeTab(true);
+            return;
+        }
         if (review) {
             setEditText(review.text);
             setEditRating(review.rating);
@@ -286,19 +295,33 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
     }
 
     function handleJournal(){
-        setActivePage("journal");
-        Cookie.set('activeTab', "table", { expires: 7 });
-        navigate("/journal");
+        if(!isLoggedIn)
+        {
+            setShowPopUp(true);
+            setTriedToChangeTab(true);
+        }
+        else {
+            setActivePage("journal");
+            Cookie.set('activeTab', "table", {expires: 7});
+            navigate("/journal");
+        }
     }
 
     function handleWatchlist(){
-        setActivePage("watchlist");
-        Cookie.set('activeTab', "table", { expires: 7 });
-        navigate("/watchlist");
+        if(!isLoggedIn)
+        {
+            setShowPopUp(true);
+            setTriedToChangeTab(true);
+        }
+        else {
+            setActivePage("watchlist");
+            Cookie.set('activeTab', "table", {expires: 7});
+            navigate("/watchlist");
+        }
     }
 
-    function handleAbout(){
-        navigate("/about");
+    function handleDashboard(){
+        navigate("/");
     }
 
     function handleAllReviews(){
@@ -323,7 +346,7 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
         <div className="details">
 
             <header className="app-header">
-                <img src = {MakiLogo} alt= "logo_maki" className="logo-maki" onClick={() => handleAbout()} />
+                <img src = {MakiLogo} alt= "logo_maki" className="logo-maki" onClick={() => handleDashboard()} />
                 <div className="search-bar">
                     <input type="text" placeholder="Search..." className="search-input"
                            onChange={(e) => setSearchInput(e.target.value)}
@@ -355,12 +378,17 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
                         onClick={() => handleJournal()}>Journal</button>
                 <button className={`watchlist-button-header ${activePage === "watchlist" ? "active" : ""}`}
                         onClick={() => handleWatchlist()}>Watchlist</button>
-                <img src ={ProfileIcon} alt= "user_icon" className="user-icon"/>
+                {isLoggedIn && (
+                    <img src ={ProfileIcon} alt= "user_icon" className="user-icon"/>
+                )}
+                {!isLoggedIn && (
+                    <button className="get-started-button" onClick={() => navigate('/login')}>Get Started!</button>
+                )}
 
             </header>
 
             <main>
-
+                {showPopUp && triedToChangeTab && <NotLoggedIn onClose={() => setShowPopUp(false)}/>}
                 <div className="movie-details">
                     <div className = "poster">
                         <img src={movie.image} alt={movie.name}/>

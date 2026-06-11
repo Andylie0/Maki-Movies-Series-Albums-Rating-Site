@@ -30,7 +30,7 @@ export default function Register() {
             });
 
             if(response.ok)
-                navigate('/');
+                navigate('/login');
             else {
                 console.error("Login failed:", response.statusText);
             }
@@ -43,7 +43,7 @@ export default function Register() {
     }
 
     function handleLogin(){
-        navigate('/');
+        navigate('/login');
     }
 
     return(

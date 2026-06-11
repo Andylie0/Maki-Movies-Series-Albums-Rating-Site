@@ -152,8 +152,8 @@ export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQ
         navigate("/stats");
     }
 
-    function handleAbout(){
-        navigate("/about");
+    function handleDashboard(){
+        navigate("/");
     }
 
     //function for edit button
@@ -274,7 +274,7 @@ export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQ
         <div className="App">
             <ParticlesBackground colour="#FFCE27"/>
             <header className="app-header">
-                <img src = {MakiLogo} alt= "logo_maki" className="logo-maki" onClick={() => handleAbout()}/>
+                <img src = {MakiLogo} alt= "logo_maki" className="logo-maki" onClick={() => handleDashboard()}/>
                 <div className="search-bar">
                     <input type="text" placeholder="Search..." className="search-input"
                         onChange={(e) => setSearchInput(e.target.value)}

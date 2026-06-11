@@ -8,6 +8,7 @@ import Stats from './pages/master_view/Statistics.jsx'
 import Details from './pages/detail/Details.jsx'
 import About from './pages/landing_page/About.jsx'
 import Dashboard from './pages/dashboard/Dashboard.jsx'
+import Trivia from './pages/dashboard/Trivia.jsx'
 import {useState, useEffect} from "react";
 import {BASE_URL} from "./config.js";
 import NextStep from "./pages/authentification/NextStep.jsx";
@@ -16,7 +17,7 @@ import Watchlist from "./pages/watchlist/Watchlist.jsx";
 export function App() {
     const [allReviews, setReviewState] = useState([]);
     const [allMovies, setAllMovies] = useState([]);
-
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const { isOnline, addToQueue } = useOffline();
 
     useEffect(() => {
@@ -56,7 +57,9 @@ export function App() {
                 </div>
             )}
             <Routes>
-                <Route path="/" element={<Login/>}/>
+                <Route path="/" element={<Dashboard allMovies={allMovies}
+                    isLoggedIn={isLoggedIn}
+                />}/>
                 <Route path="/journal" element={<Journal
                     allReviews={allReviews}
                     setReviewState={setReviewState}
@@ -75,16 +78,15 @@ export function App() {
                     allMovies={allMovies}
                     isOnline={isOnline}
                     addToQueue={addToQueue}
-                />}/>
-                <Route path="/about" element={<About
-                    allMovies={allMovies}
+                    isLoggedIn={isLoggedIn}
                 />}/>
                 <Route path="/watchlist" element={<Watchlist
                     allMovies={allMovies}
                 />} />
-                <Route path="/dashboard" element={<Dashboard />}/>
+                <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
                 <Route path="/forgot-password" element={<ForgotPassword/>}/>
                 <Route path="/next-step" element={<NextStep/>}/>
+                <Route path="/trivia" element={<Trivia/>}/>
             </Routes>
         </div>
     )

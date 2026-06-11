@@ -28,7 +28,7 @@ export default function NextStep() {
             );
             if(response.ok) {
                 localStorage.removeItem("reset_token");
-                navigate('/');
+                navigate('/login');
             }
             else {
                 console.error("Resetting password failed:", response.statusText);
@@ -39,7 +39,7 @@ export default function NextStep() {
             console.error("Error during resetting password:", error);
         }
 
-        navigate('/');
+        navigate('/login');
     }
 
     return(
