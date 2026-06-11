@@ -13,7 +13,7 @@ export default function ParticlesBackground({colour}){
     }, []);
 
     const options = useMemo(() => ({
-        background: { color: { value: "#343434" } },
+        background: { color: { value: "#38373d" } },
         particles: {
             number: { value: 80 },
             color: { value: `${colour}`},

@@ -11,7 +11,7 @@ main{
     justify-content: space-between;
     align-items: center;
     padding: 10px 60px;
-    background-color: rgba(33,31,99,0.5);
+    background-color: rgba(33,31,99,0.67);
 }
 
 .logo-maki{
@@ -153,7 +153,7 @@ main{
 
 .movie-table{
     justify-content: center;
-    background-color: #343434;
+    background: rgba(30, 30, 45, 0.85);
     border-spacing: 100px;
     border-collapse: collapse;
     width: 78%;

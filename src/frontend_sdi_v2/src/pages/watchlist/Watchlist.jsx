@@ -1,17 +1,70 @@
 import MakiLogo from "../../assets/MAKI.png";
 import ProfileIcon from "../../assets/profile_img.png";
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useState, React, useEffect} from "react";
+import { FaRegTrashAlt } from "react-icons/fa";
+import DVDLogoAnimation from "react-dvd-player-animation";
 import {BASE_URL, WB_URL} from "../../config.js";
+import { IoBookmark } from "react-icons/io5";
 import './Watchlist.css'
 import Cookie from "js-cookie";
 
-export default function Watchlist({allMovies}){
+function MyDVD() {
+    const HEIGHT = 90;
+    const WIDTH = 180;
 
+    return (
+        <div
+            style={{
+                height: `${HEIGHT}vh`,
+                width: `${WIDTH}vh`,
+                border: "5px solid transparent",
+                margin: "auto",
+                zIndex: 1,
+                position: "absolute",
+                pointerEvents: "none",
+                overflow: "hidden",
+            }}
+        >
+            <DVDLogoAnimation
+                height={800}
+                width={1700}
+                logoHeight={20}
+                logoWidth={160}
+                xSpeed={1.5}
+                ySpeed={1.5}
+            >
+            </DVDLogoAnimation>
+        </div>
+    );
+}
+
+export default function Watchlist({allMovies}){
     const navigate = useNavigate();
+
+    const [watchlist, setWatchlist] = useState([]);
+    const storedUser = JSON.parse(localStorage.getItem('user')) || null;
+    const userId = storedUser.id;
 
     const [activePage, setActivePage] = useState("watchlist")
     const [searchInput, setSearchInput] = useState("");
+
+    async function fetchWatchlist() {
+        const response = await fetch(`${BASE_URL}/watchlist/?user_id=${userId}`, {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json', },
+            credentials: 'include',
+        });
+        if (!response.ok) {
+            throw new Error('Failed to fetch watchlist');
+        }
+        const data = await response.json();
+        setWatchlist(data);
+    }
+
+    useEffect(() => {
+        fetchWatchlist();
+    }, []);
 
     function handleSearchNav() {
         const movie = allMovies.find(movie => movie.name.toLowerCase().includes(searchInput.toLowerCase()))
@@ -37,6 +90,15 @@ export default function Watchlist({allMovies}){
         ).slice(0, 3)
         : []
 
+    async function handleDelete(id){
+        const response = await fetch(`${BASE_URL}/watchlist/${id}?user_id=${userId}`, {
+            method: 'DELETE',
+            credentials: "include",
+        })
+        if (response.ok) {
+            fetchWatchlist();
+        }
+    }
 
     return(
         <div className="watchlist-container">
@@ -72,13 +134,45 @@ export default function Watchlist({allMovies}){
                 <button className={`watchlist-button-header ${activePage === "watchlist" ? "active" : ""}`}
                         onClick={() => setActivePage("watchlist")}>Watchlist</button>
                 <img src ={ProfileIcon} alt= "user_icon" className="user-icon"/>
-
             </header>
-            <div className="watchlist-content">
-                <div className="first-square" />
-                <h1 className="nothing-implementedlolol">Hippie SHIT!!!</h1>
-                <div className="second-square" />
-            </div>
+            <MyDVD />
+            <main className="watchlist-main">
+                <div className="watchlist-title">
+                    <h1 className="tilte"> <IoBookmark size={30} /> Your watchlist</h1>
+                    <span className="line2" />
+                </div>
+                <div className="watchlist-content">
+                    {watchlist.length === 0 ? (
+                        <div className="empty-watchlist">
+                            <p>Your watchlist is empty!</p>
+                        </div>
+                    ) : (
+                        <div className="watchlist-grid">
+                            {watchlist.map(w => {
+                                const movie = allMovies.find(m => m.id === w.movie_id);
+                                if(!movie)
+                                {
+                                    return null;
+                                }
+                                return(
+                                    <div key={w.id} className="watchlist-item">
+                                        <div className="image-wrapper" onClick={() => navigate(`/details/${movie.id}`)}>
+                                            <img className="movie-image" src={movie.image} alt={movie.name} />
+                                        </div>
+                                        <div className="movie-info">
+                                            <p className="movie-name" onClick={() => navigate(`/details/${movie.id}`)}>
+                                                {movie.name}</p>
+                                            <button className="trash-button" onClick={() => handleDelete(w.id)} aria-label="Delete item">
+                                                <FaRegTrashAlt size={20} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
+                </div>
+            </main>
         </div>
     );
 }

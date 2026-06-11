@@ -9,6 +9,7 @@ import ArrowGif from "../../assets/ffs.gif";
 import funnyGhost from "../../assets/ghost1gif.gif";
 import ritsu from "../../assets/ritsuFloating.gif";
 import quentin from "../../assets/quentin.png";
+import depeche from "../../assets/depeche-mode-dm_6901717188356476_dr.gif";
 import About from "../landing_page/About.jsx";
 import Chat from "../landing_page/Chat.jsx";
 import { IoIosClose } from "react-icons/io";
@@ -172,9 +173,12 @@ export default function Dashboard({allMovies, isLoggedIn}){
             <div className="utils">
                 <img className="ghost1" src={funnyGhost} alt="ghost"/>
                 <img className="ritsu" src={ritsu} alt="ritsu"/>
-                <img className="quentin" src={quentin} alt="quentin"/>
-                <span className="laser1"></span>
-                <span className="laser2"></span>
+                <div className="quentin-wrapper">
+                    <img className="quentin" src={quentin} alt="quentin"/>
+                    <div className="laser1"></div>
+                    <div className="laser2"></div>
+                </div>
+                <img className="depeche" src={depeche} alt="depeche"/>
             </div>
 
         </div>

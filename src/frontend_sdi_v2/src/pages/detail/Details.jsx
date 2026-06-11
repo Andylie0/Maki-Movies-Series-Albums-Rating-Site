@@ -479,7 +479,7 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
                             <div className="stats-rate">
                                 <span className="rating-numb">
                                     {movie.rating} / 5</span>
-                                <span className="reviews">{revrev(movie)} CHADS</span>
+                                <span className="reviews">{revrev(movie)} Chads</span>
                             </div>
                         </div>
                         {isWatchlisted ? (

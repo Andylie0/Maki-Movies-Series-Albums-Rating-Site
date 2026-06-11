@@ -1,3 +1,8 @@
+body{
+    background-color: #38373d;
+    color: #ffffff;
+}
+
 .get-started-button{
     border: 6px solid rgba(63, 183, 41, 0.20);
     outline: none;
@@ -68,8 +73,16 @@
     width: 100px;
     height: 100px;
     position: absolute;
-    left: 6%;
-    top: 34%;
+    left: 13%;
+    top: 22%;
+}
+
+.depeche{
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    left: 8%;
+    bottom: 27%;
 }
 
 .sma-showcase{
@@ -87,9 +100,9 @@
 
 .line1{
     margin-top:-10px;
-    width: 72%;
+    width: 72.5%;
     height: 2px;
-    background-color: white;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6) 50%, transparent);
 }
 
 .sma-showcase-grid{
@@ -195,13 +208,21 @@
      bottom: 25%;
 }
 
-.quentin{
-    width: 250px;
-    height: 150px;
+.quentin-wrapper {
     position: absolute;
     right: 7%;
     top: 15%;
+    width: 250px;
+    height: 150px;
     z-index: 1;
+}
+
+
+.quentin{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: relative;
 }
 
 .laser1{
@@ -209,8 +230,8 @@
     rotate: 160deg;
     border-radius: 10px;
     position: absolute;
-    right: 15%;
-    top: 25.8%;
+    right: 55%;
+    top: 64%;
     animation: qs 1s alternate infinite;
     z-index: 1;
 }
@@ -230,8 +251,8 @@
     border-radius:10px;
     border: 2px solid red;
     position: absolute;
-    right: 13%;
-    top: 25.8%;
+    right: 42%;
+    top: 64%;
     animation: qs 1s alternate infinite;
     z-index: 1;
 }
@@ -303,6 +324,7 @@
     .arrow,
     .ghost1,
     .ritsu,
+    .depeche,
     .quentin,
     .laser1,
     .laser2 {

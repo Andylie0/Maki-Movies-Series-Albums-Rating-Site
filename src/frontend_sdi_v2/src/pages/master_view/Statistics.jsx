@@ -125,7 +125,7 @@ export default function Statistics({allReviews, allMovies}) {
                 <button className={`journal-button-header ${activePage ==="journal" ? "active" : ""}`}
                         onClick={() => setActivePage("journal")}>Journal</button>
                 <button className={`watchlist-button-header ${activePage === "watchlist" ? "active" : ""}`}
-                        onClick={() => setActivePage("watchlist")}>Watchlist</button>
+                        onClick={() => {setActivePage("watchlist"); nav('/watchlist'); } }>Watchlist</button>
                 <img src ={ProfileIcon} alt= "user_icon" className="user-icon"/>
             </header>
 
