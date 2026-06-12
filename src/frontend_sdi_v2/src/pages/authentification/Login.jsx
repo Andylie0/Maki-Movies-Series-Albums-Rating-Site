@@ -4,6 +4,7 @@ import MakiLogo from '../../assets/MAKI.png'
 import hehe from '../../assets/michael-jackson-hee-hee.mp3'
 import {useEffect, useState} from "react";
 import {BASE_URL} from "../../config.js";
+import Cookie from "js-cookie";
 
 export function Login({setIsLoggedIn}){
     const navigate = useNavigate();
@@ -37,6 +38,7 @@ export function Login({setIsLoggedIn}){
             if (response.ok) {
                 const userData = await response.json();
                 localStorage.setItem("user", JSON.stringify(userData));
+                Cookie.set('user', JSON.stringify(userData), { expires: 1/24 });
                 successHandleLogin();
             } else {
                 console.error("Login failed:", response.statusText);

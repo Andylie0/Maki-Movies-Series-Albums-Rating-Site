@@ -36,10 +36,11 @@ export default function Dashboard({allMovies, isLoggedIn, setIsLoggedIn}){
 
     let user_id, imageUser,storedUser;
 
-    if(isLoggedIn === true){
-        storedUser = JSON.parse(localStorage.getItem('user')) || null;
-        user_id = storedUser.id;
-        imageUser = JSON.parse(localStorage.getItem('user'))?.image;
+    if(Cookie.get('user')){
+        storedUser = JSON.parse(Cookie.get('user')) || null;
+        user_id = storedUser?.id;
+        setIsLoggedIn(true);
+        imageUser = JSON.parse(Cookie.get('user'))?.image;
     }
 
     const [open, setOpen] = useState(false);
@@ -95,6 +96,7 @@ export default function Dashboard({allMovies, isLoggedIn, setIsLoggedIn}){
             if (response.ok) {
                 localStorage.removeItem('user');
                 alert('Logged out successfully!');
+                Cookie.remove('user');
                 setIsLoggedIn(false);
                 setOpen(false);
             } else {

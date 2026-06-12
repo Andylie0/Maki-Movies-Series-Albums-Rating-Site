@@ -21,10 +21,10 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
     const [movie, setMovie] = useState(null);
 
     let userId, imageUser;
-    if(isLoggedIn === true) {
-        const storedUser = JSON.parse(localStorage.getItem('user')) || null;
+    if(Cookie.get('user')) {
+        const storedUser = JSON.parse(Cookie.get('user')) || null;
         userId = storedUser.id;
-        imageUser = JSON.parse(localStorage.getItem('user'))?.image;
+        imageUser = JSON.parse(Cookie.get('user'))?.image;
     }
 
     const [open, setOpen] = useState(false);
@@ -434,6 +434,7 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
             });
             if (response.ok) {
                 localStorage.removeItem('user');
+                Cookie.remove('user');
                 navigate('/');
                 setIsLoggedIn(false);
                 setOpen(false);

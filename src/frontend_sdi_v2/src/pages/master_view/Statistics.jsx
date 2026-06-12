@@ -107,6 +107,7 @@ export default function Statistics({allReviews, allMovies, setIsLoggedIn}) {
             if (response.ok) {
                 localStorage.removeItem('user');
                 setIsLoggedIn(false);
+                Cookie.remove('user');
                 nav('/');
                 setOpen(false);
             } else {

@@ -282,6 +282,7 @@ export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQ
             if (response.ok) {
                 localStorage.removeItem('user');
                 setIsLoggedIn(false);
+                Cookie.remove('user');
                 navigate('/');
                 setOpen(false);
             } else {

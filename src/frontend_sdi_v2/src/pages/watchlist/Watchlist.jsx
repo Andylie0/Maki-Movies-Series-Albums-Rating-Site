@@ -113,7 +113,9 @@ export default function Watchlist({allMovies, setIsLoggedIn}){
             if (response.ok) {
                 localStorage.removeItem('user');
                 alert('Logged out successfully!');
+                navigate('/');
                 setIsLoggedIn(false);
+                Cookie.remove('user');
                 setOpen(false);
             } else {
                 console.error('Logout failed on server:', response.statusText);
