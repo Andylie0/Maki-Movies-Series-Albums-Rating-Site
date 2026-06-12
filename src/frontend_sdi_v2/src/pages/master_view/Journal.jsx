@@ -10,8 +10,9 @@ import {BASE_URL, WB_URL} from "../../config.js";
 import StarRating from '../../components/StarRating.jsx';
 import { parseRating } from '../../utils/rating.js';
 import { FiEdit2, FiX, FiSearch } from 'react-icons/fi';
+import {IoIosLogOut} from "react-icons/io";
 
-export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQueue}){
+export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQueue, setIsLoggedIn}){
     const storedUser = JSON.parse(localStorage.getItem('user')) || null;
     const userId = storedUser.id;
 
@@ -23,6 +24,7 @@ export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQ
     const [isEditing, setIsEditing] = useState(false);
     const [selectedReview, setSelectedReview] = useState(null);
     const [editText, setEditText] = useState("");
+    const [open, setOpen] = useState(false);
     const [editRating, setEditRating] = useState(0);
     const [tableSearch, setTableSearch] = useState("");
     const [searchInput, setSearchInput] = useState("");
@@ -270,6 +272,27 @@ export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQ
         ).slice(0, 3)
         : []
 
+    async function handleLogout(){
+        try {
+            const response = await fetch(`${BASE_URL}/auth/logout/`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+            });
+            if (response.ok) {
+                localStorage.removeItem('user');
+                setIsLoggedIn(false);
+                navigate('/');
+                setOpen(false);
+            } else {
+                console.error('Logout failed on server:', response.statusText);
+                alert('Failed to log out. Please try again.');
+            }
+        } catch (error) {
+            console.error('Network error during logout:', error);
+        }
+    }
+
     return (
         <div className="App">
             <ParticlesBackground colour="#FFCE27"/>
@@ -307,9 +330,16 @@ export function Journal({allReviews, setReviewState, allMovies, isOnline, addToQ
                         onClick={() => setActivePage("journal")}>Journal</button>
                 <button className={`watchlist-button-header ${activePage === "watchlist" ? "active" : ""}`}
                         onClick={() => {setActivePage("watchlist"); handleWatchlist();}}>Watchlist</button>
-                <img src ={imageUser != "null" ? imageUser : ProfileIcon} alt= "user_icon" className="user-icon"/>
+                <img src ={imageUser !== "null" ? imageUser : ProfileIcon} alt= "user_icon" className="user-icon" onClick={()=>setOpen(!open)}/>
             </header>
 
+            {open && (
+                <div className="dropdown">
+                    <button className="dropdown-item profile-action">Change profile picture!</button>
+                    <hr className="dropdown-divider" />
+                    <button className="dropdown-item logout" onClick ={()=>handleLogout()}><IoIosLogOut size={20}/> Logout!</button>
+                </div>
+            )}
             <main className="main-content">
 
                 <div className="button-section">

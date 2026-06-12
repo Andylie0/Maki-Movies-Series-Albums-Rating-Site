@@ -1,5 +1,5 @@
 matrix_data_sma = {
-    "id": [1,2,3,4,5,6,7,8,9,10,11,12,13],
+    "id": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36],
 
     "name": [
         "The Matrix",
@@ -14,23 +14,55 @@ matrix_data_sma = {
         "Drive My Car",
         "Top Gun: Maverick",
         "The Fast and the Furious: Tokyo Drift",
-        "Viva la Vida or Death and All His Friends"
+        "Viva la Vida or Death and All His Friends",
+        "Aladdin Sane",
+        "The Dark Side of the Moon",
+        "Thriller",
+        "Violator",
+        "Abbey Road",
+        "Like a Prayer",
+        "Travelling Without Moving",
+        "Kill 'Em All",
+        "Igor",
+        "Ultraviolence",
+        "Back to Black",
+        "Mr. Robot",
+        "A Knight of the Seven Kingdoms",
+        "Game of Thrones",
+        "The Boys",
+        "JoJo's Bizarre Adventure",
+        "Modern Family",
+        "Euphoria",
+        "Young Sheldon",
+        "Breaking Bad",
+        "Succession",
+        "Twin Peaks",
+        "House",
+
     ],
 
     "number_of_reviews": [
-        120, 440, 137, 54, 345, 1100, 800, 532, 1245, 5000, 10000, 6967, 25
+        120, 440, 137, 54, 345, 1100, 800, 532, 1245, 5000, 10000, 6967,
+        25, 328, 490, 698, 356, 653, 331, 296, 505, 644, 421, 495,
+        240, 460, 512, 823, 19067, 534, 795, 324, 541, 676, 378, 633,
     ],
 
     "duration": [
-        136, 150, 150, 85, 116, 169, 133, 143, 114, 179, 130, 104, 25
+        136, 150, 150, 85, 116, 169, 133, 143, 114, 179, 130, 104,
+        25, 41, 42, 42, 47, 47, 51, 62, 51, 39, 51, 60,
+        45, 12, 74, 40, 193, 250, 26, 141, 62, 39, 30, 177,
     ],
 
     "rating": [
-        4.3, 4.1, 3.2, 2.5, 4, 4.8, 4.6, 3.8, 3.2, 4.3, 4.6, 3.4, 5
+        4.3, 4.1, 3.2, 2.5, 4, 4.8, 4.6, 3.8, 3.2, 4.3, 4.6, 3.4,
+        5, 4.4, 4.7, 4.9, 4.2, 4.8, 4.0, 4.5, 4.6, 4.7, 3.8, 4.1,
+        4.2, 4.3, 4.6, 4.2, 5, 4.2, 4, 3.8, 4.8, 4.2, 4.1, 4.3,
     ],
 
     "year_released": [
-        1999, 2025, 2025, 2004, 2006, 2014, 1975, 2004, 2023, 2021, 2022, 2006, 2005
+        1999, 2025, 2025, 2004, 2006, 2014, 1975, 2004, 2023, 2021, 2022, 2006,
+        2005, 1973, 1973, 1982, 1990, 1969, 1989, 1996, 1983, 2019, 2014, 2006,
+        2015, 2026, 2011, 2019, 2012, 2009, 2019, 2017, 2008, 2018, 1990, 2004
     ],
 
     "image": [
@@ -46,12 +78,40 @@ matrix_data_sma = {
         "https://m.media-amazon.com/images/M/MV5BOGE5ZWRhYjYtNzVkMS00ZGU3LTg2MTMtODYyMmJlMDMyZjU0XkEyXkFqcGc@._V1_SX300.jpg",
         "https://m.media-amazon.com/images/M/MV5BMDBkZDNjMWEtOTdmMi00NmExLTg5MmMtNTFlYTJlNWY5YTdmXkEyXkFqcGc@._V1_SX300.jpg",
         "https://m.media-amazon.com/images/M/MV5BMTQ2NTMxODEyNV5BMl5BanBnXkFtZTcwMDgxMjA0MQ@@._V1_SX300.jpg",
-        "https://dn721803.ca.archive.org/0/items/mbid-fbfb5993-e66a-42f3-becc-07f9983c0c4e/mbid-fbfb5993-e66a-42f3-becc-07f9983c0c4e-31698461543.jpg"
+        "https://dn721803.ca.archive.org/0/items/mbid-fbfb5993-e66a-42f3-becc-07f9983c0c4e/mbid-fbfb5993-e66a-42f3-becc-07f9983c0c4e-31698461543.jpg",
+        "https://upload.wikimedia.org/wikipedia/en/thumb/6/6e/DavisBowieAladdinSane.jpg/250px-DavisBowieAladdinSane.jpg",
+        "https://upload.wikimedia.org/wikipedia/en/thumb/3/3b/Dark_Side_of_the_Moon.png/250px-Dark_Side_of_the_Moon.png",
+        "https://upload.wikimedia.org/wikipedia/en/thumb/5/55/Michael_Jackson_-_Thriller.png/250px-Michael_Jackson_-_Thriller.png",
+        "https://i.scdn.co/image/ab67616d0000b273e2b1de6eadee18a2022e1dd0",
+        "https://upload.wikimedia.org/wikipedia/commons/a/a4/The_Beatles_Abbey_Road_album_cover.jpg",
+        "https://upload.wikimedia.org/wikipedia/en/0/08/Madonna_-_Like_a_Prayer_album.png",
+        "https://upload.wikimedia.org/wikipedia/en/5/5a/Travellingwithoutmoving.png",
+        "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Metallica_-_Kill_%27Em_All_cover.jpg/250px-Metallica_-_Kill_%27Em_All_cover.jpg",
+        "https://upload.wikimedia.org/wikipedia/en/thumb/5/51/Igor_-_Tyler%2C_the_Creator.jpg/250px-Igor_-_Tyler%2C_the_Creator.jpg",
+        "https://upload.wikimedia.org/wikipedia/ro/9/91/Ultraviolence.jpg",
+        "https://upload.wikimedia.org/wikipedia/en/6/67/Amy_Winehouse_-_Back_to_Black_%28album%29.png",
+        "https://m.media-amazon.com/images/M/MV5BOTg4NTBiZDAtZTc0YS00NzZlLTg4Y2ItNGQ3M2ZlMDM5MWQzXkEyXkFqcGc@._V1_.jpg",
+        "https://m.media-amazon.com/images/M/MV5BYzg4M2U3YWMtMWY4MS00MzFkLTk2ZWQtOThiOGYxZDEyMGQ2XkEyXkFqcGc@._V1_.jpg",
+        "https://m.media-amazon.com/images/M/MV5BMTNhMDJmNmYtNDQ5OS00ODdlLWE0ZDAtZTgyYTIwNDY3OTU3XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+        "https://resizing.flixster.com/StibykxxpJER6U_N50JYuXDpneA=/ems.cHJkLWVtcy1hc3NldHMvdHZzZXJpZXMvZTVjMzZkMzktN2Y4ZS00MjZjLTgyMTMtMzhhOWI1OTBiYzA3LmpwZw==",
+        "https://m.media-amazon.com/images/M/MV5BMzIyNzY4NTMtNmVhYS00OWFhLTkwMWMtOGFkNTdmNWU2ZDdiXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+        "https://www.peacocktv.com/dam/growth/assets/Library/ModernFamily/modern-family-description-image.jpg",
+        "https://m.media-amazon.com/images/M/MV5BYzg5MTVmNjgtMGQ3Zi00YThlLWFjMzgtYzc2NGUyMzE2MWQ1XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+        "https://m.media-amazon.com/images/M/MV5BODU3M2FmMDctNGViYi00OGUxLThkZDAtZmRkZDBhNWJhNDIzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
+        "https://m.media-amazon.com/images/M/MV5BMzU5ZGYzNmQtMTdhYy00OGRiLTg0NmQtYjVjNzliZTg1ZGE4XkEyXkFqcGc@._V1_.jpg",
+        "https://m.media-amazon.com/images/M/MV5BYTY4YTVkY2QtMjRmOS00YzliLWIxOWQtMTdkOTVkN2UzODNmXkEyXkFqcGc@._V1_QL75_UX190_CR0,0,190,281_.jpg",
+        "https://m.media-amazon.com/images/M/MV5BMTExNzk2NjcxNTNeQTJeQWpwZ15BbWU4MDcxOTczOTIx._V1_FMjpg_UX1000_.jpg",
+        "https://m.media-amazon.com/images/M/MV5BZWMyZjQ0MGMtZTFkOC00OTg0LThkNzktMTg5N2ZkYzg0MThjXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg",
     ],
 
     "type": [
         "Movie","Movie","Movie","Movie","Movie","Movie",
-        "Movie","Movie","Movie","Movie","Movie","Movie","Album"
+        "Movie","Movie","Movie","Movie","Movie","Movie",
+        "Album","Album", "Album", "Album", "Album", "Album",
+        "Album", "Album", "Album", "Album", "Album", "Album",
+        "Series", "Series", "Series", "Series", "Series", "Series",
+        "Series", "Series", "Series", "Series", "Series", "Series",
+
     ],
 
     "description" : [
@@ -67,7 +127,30 @@ matrix_data_sma = {
         "A renowned stage actor and director learns to cope with a big personal loss when he receives an offer to direct a production of Uncle Vanya in Hiroshima.",
         "The story involves Maverick confronting his past while training a group of younger Top Gun graduates, including the son of his deceased best friend, for a dangerous mission.",
         "A teenager becomes a major competitor in the world of drift racing after moving in with his father in Tokyo to avoid a jail sentence in America.",
-        "Viva la Vida or Death and All His Friends (2008) is Coldplay's fourth studio album, featuring a major stylistic shift towards art rock and experimental pop produced by Brian Eno"
+        "Viva la Vida or Death and All His Friends (2008) is Coldplay's fourth studio album, featuring a major stylistic shift towards art rock and experimental pop produced by Brian Eno",
+        "Aladdin Sane is the sixth studio album by the English musician David Bowie, released in April 1973. The follow-up to his breakthrough The Rise and Fall of Ziggy Stardust and the Spiders from Mars (1972), it was the first album he wrote and released after achieving global stardom.",
+        "The Dark Side of the Moon is the eighth studio album by the English progressive rock band Pink Floyd, released on 1 March 1973 by Capitol Records in the US. Developed during live performances, it was conceived as a concept album that would focus on the pressures faced by the band during their arduous lifestyle.",
+        "Michael Jackson's Thriller remains the best-selling album of all time. Co-produced with Quincy Jones, this timeless masterpiece seamlessly fuses pop, R&B, funk, and rock. It broke racial barriers in the music industry and delivered seven top-10 singles, including `Billie Jean`, `Beat It`, and the iconic title track.",
+        "Released in 1990, Violator is the seventh studio album by English electronic band Depeche Mode. It is widely considered a masterpiece that propelled the band to global superstardom. The album seamlessly blends darkwave, synth-pop, and electronic blues.",
+        "Abbey Road is the eleventh studio album by The Beatles and the final record they recorded together. Famous for its iconic zebra-crossing cover art, it blends blues, pop, and progressive rock. The album is widely celebrated for its rich harmonies, pioneering Moog synthesizer usage, and the seamless 16-minute musical medley on side two.",
+        "Madonna's Like A Prayer is an immaculate collection of songs which saw the superstar looking inwards for divine inspiration, taking in grief, loss, redemption and empowerment. With the celestial like a prayer, she created her own new testament.",
+        "Travelling Without Moving is the third studio album by the British funk and acid jazz band Jamiroquai, released on August 28, 1996. It stands as the band's most commercially successful release and holds the Guinness World Record as the best-selling funk album in history, with over 8 million copies sold worldwide.",
+        "Kill 'Em All is the debut album by the American heavy metal band Metallica, released on July 25, 1983, through the independent label Megaforce Records. Widely credited as the foundational blueprint for thrash metal, it features a raw, furious hybrid of New Wave of British Heavy Metal (NWOBHM) riffs and punk rock aggression.",
+        "IGOR is the critically acclaimed fifth studio album by Tyler, The Creator, released in 2019. It is a genre-bending concept album blending hip-hop, R&B, funk, and pop. The narrative follows a toxic love triangle where the protagonist falls for a man who is torn between Tyler and another woman.",
+        "Ultraviolence is Lana Del Rey's third studio album, defined by its dark, atmospheric sound. Executive produced by Dan Auerbach, the album trades her earlier cinematic hip-hop for hazy, 1970s-style psychedelic rock, blues, and heavy reverb. Lyrically, it explores themes of toxic romance, submission, and old Hollywood noir.",
+        "Back to Black is the second and final studio album by the English singer-songwriter Amy Winehouse, released on 27 October 2006 by Island Records. Winehouse predominantly based the album on her tumultuous relationship with Blake Fielder-Civil, who temporarily left her to pursue an ex-girlfriend.",
+        "Mr. Robot follows Elliot, a young programmer who works as a cyber-security engineer by day and as a vigilante hacker by night. Elliot finds himself at a crossroads when the mysterious leader of an underground hacker group recruits him to destroy the firm he is paid to protect. Compelled by his personal beliefs, Elliot struggles to resist the chance to take down the multinational CEOs he believes are running (and ruining) the world. Eventually, he realizes that a global conspiracy does exist, but not the one he expected.",
+        "A century before the events of 'Game of Thrones,' two unlikely heroes wandered Westeros... a young, naïve but courageous knight, Ser Duncan the Tall, and his diminutive squire, Egg. Set in an age when the Targaryen line still holds the Iron Throne, and the memory of the last dragon has not yet passed from living memory, great destinies, powerful foes, and dangerous exploits all await these improbable and incomparable friends.",
+        "Noble families vie for control of Westeros and its Iron Throne, while an ancient threat beyond the Wall begins to stir.",
+        "A group of vigilantes set out to take down corrupt superheroes who abuse their superpowers.",
+        "The story of the Joestar family, who are possessed with intense psychic strength, and the adventures each member encounters throughout their lives.",
+        "Three different, but related, families face trials and tribulations in their own uniquely comedic ways.",
+        "A dark coming-of-age drama exploring love, addiction, friendship and identity in a world full of temptation and uncertainty.",
+        "Meet a child genius named Sheldon Cooper (already seen as an adult in The Big Bang Theory (2007)) and his family. Some unique challenges face Sheldon, who is socially impaired.",
+        "A chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine with a former student to secure his family's future.",
+        "The Roy family is known for controlling the biggest media and entertainment company in the world. However, their world changes when their father steps down from the company.",
+        "An idiosyncratic FBI agent investigates the murder of a young woman in the even more idiosyncratic town of Twin Peaks.",
+        "Using a crack team of doctors and his wits, an antisocial maverick doctor specializing in diagnostic medicine does whatever it takes to solve puzzling cases that come his way."
     ]
 }
 

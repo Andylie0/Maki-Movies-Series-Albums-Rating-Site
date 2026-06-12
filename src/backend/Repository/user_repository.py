@@ -8,6 +8,9 @@ class UserRepository:
     def get_by_username(self, username: str) -> UserModel | None:
         return self.db.query(UserModel).filter_by(username=username).first()
 
+    def get_by_id(self, user_id: int) -> UserModel | None:
+        return self.db.query(UserModel).filter_by(id=user_id).first()
+
     def create(self, user: UserModel) -> UserModel:
         self.db.add(user)
         self.db.commit()

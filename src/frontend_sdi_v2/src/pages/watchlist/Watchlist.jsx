@@ -8,6 +8,7 @@ import {BASE_URL, WB_URL} from "../../config.js";
 import { IoBookmark } from "react-icons/io5";
 import './Watchlist.css'
 import Cookie from "js-cookie";
+import {IoIosLogOut} from "react-icons/io";
 
 function MyDVD() {
     const HEIGHT = 90;
@@ -39,12 +40,14 @@ function MyDVD() {
     );
 }
 
-export default function Watchlist({allMovies}){
+export default function Watchlist({allMovies, setIsLoggedIn}){
     const navigate = useNavigate();
 
     const [watchlist, setWatchlist] = useState([]);
     const storedUser = JSON.parse(localStorage.getItem('user')) || null;
     const userId = storedUser.id;
+    const imageUser = JSON.parse(localStorage.getItem('user'))?.image;
+    const [open, setOpen] = useState(false);
 
     const [activePage, setActivePage] = useState("watchlist")
     const [searchInput, setSearchInput] = useState("");
@@ -100,6 +103,27 @@ export default function Watchlist({allMovies}){
         }
     }
 
+    async function handleLogout(){
+        try {
+            const response = await fetch(`${BASE_URL}/auth/logout/`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+            });
+            if (response.ok) {
+                localStorage.removeItem('user');
+                alert('Logged out successfully!');
+                setIsLoggedIn(false);
+                setOpen(false);
+            } else {
+                console.error('Logout failed on server:', response.statusText);
+                alert('Failed to log out. Please try again.');
+            }
+        } catch (error) {
+            console.error('Network error during logout:', error);
+        }
+    }
+
     return(
         <div className="watchlist-container">
             <header className="app-header">
@@ -133,8 +157,15 @@ export default function Watchlist({allMovies}){
                         onClick={() => handleJournal()}>Journal</button>
                 <button className={`watchlist-button-header ${activePage === "watchlist" ? "active" : ""}`}
                         onClick={() => setActivePage("watchlist")}>Watchlist</button>
-                <img src ={ProfileIcon} alt= "user_icon" className="user-icon"/>
+                <img src ={imageUser !== "null" ? imageUser : ProfileIcon} alt= "user_icon" className="user-icon" onClick={()=>setOpen(!open)}/>
             </header>
+            {open && (
+                <div className="dropdown">
+                    <button className="dropdown-item profile-action">Change profile picture!</button>
+                    <hr className="dropdown-divider" />
+                    <button className="dropdown-item logout" onClick ={()=>handleLogout()}><IoIosLogOut size={20}/> Logout!</button>
+                </div>
+            )}
             <MyDVD />
             <main className="watchlist-main">
                 <div className="watchlist-title">

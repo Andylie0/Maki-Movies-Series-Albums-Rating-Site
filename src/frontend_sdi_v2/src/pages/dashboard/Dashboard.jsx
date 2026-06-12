@@ -1,7 +1,7 @@
 import MakiLogo from "../../assets/MAKI.png";
 import ProfileIcon from "../../assets/profile_img.png";
 import {useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useState,useMemo} from "react";
 import {BASE_URL, WB_URL} from "../../config.js";
 import Cookie from "js-cookie";
 import './Dashboard.css'
@@ -12,6 +12,8 @@ import quentin from "../../assets/quentin.png";
 import depeche from "../../assets/depeche-mode-dm_6901717188356476_dr.gif";
 import About from "../landing_page/About.jsx";
 import Chat from "../landing_page/Chat.jsx";
+import { FiX } from "react-icons/fi";
+import { IoIosLogOut } from "react-icons/io";
 import { IoIosClose } from "react-icons/io";
 
 export function NotLoggedIn({onClose}){
@@ -29,15 +31,27 @@ export function NotLoggedIn({onClose}){
 }
 
 
-export default function Dashboard({allMovies, isLoggedIn}){
+export default function Dashboard({allMovies, isLoggedIn, setIsLoggedIn}){
     const navigate = useNavigate();
 
+    let user_id, imageUser,storedUser;
+
+    if(isLoggedIn === true){
+        storedUser = JSON.parse(localStorage.getItem('user')) || null;
+        user_id = storedUser.id;
+        imageUser = JSON.parse(localStorage.getItem('user'))?.image;
+    }
+
+    const [open, setOpen] = useState(false);
     const [showPopup, setShowPopup] = useState(true);
     const [showArrow, setShowArrow] = useState(false);
     const [activePage, setActivePage] = useState("")
     const [searchInput, setSearchInput] = useState("");
     const [activeTab, setActiveTab] = useState("");
     const [triedToChangeTab, setTriedToChangeTab] = useState(false);
+
+    const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+    const [imageUrlInput, setImageUrlInput] = useState("");
 
     function handleSearchNav() {
         const movie = allMovies.find(movie => movie.name.toLowerCase().includes(searchInput.toLowerCase()))
@@ -71,6 +85,27 @@ export default function Dashboard({allMovies, isLoggedIn}){
         }
     }
 
+    async function handleLogout(){
+        try {
+            const response = await fetch(`${BASE_URL}/auth/logout/`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+            });
+            if (response.ok) {
+                localStorage.removeItem('user');
+                alert('Logged out successfully!');
+                setIsLoggedIn(false);
+                setOpen(false);
+            } else {
+                console.error('Logout failed on server:', response.statusText);
+                alert('Failed to log out. Please try again.');
+            }
+        } catch (error) {
+            console.error('Network error during logout:', error);
+        }
+    }
+
 
     function handleTabChange(tab){
         if(tab === "about"){
@@ -87,11 +122,47 @@ export default function Dashboard({allMovies, isLoggedIn}){
         )
     }
 
+    const handleUpdateImageSubmit = async (e) => {
+        e.preventDefault();
+        if (!imageUrlInput.trim()) return;
+
+        try {
+            const response = await fetch(`${BASE_URL}/auth/change-picture/?user_id=${user_id}`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({ image: imageUrlInput.trim() })
+            });
+
+            if (response.ok) {
+                const updatedUser = { ...storedUser, image: imageUrlInput.trim() };
+                localStorage.setItem("user", JSON.stringify(updatedUser));
+
+                alert("Profile image updated successfully!");
+                setIsImageModalOpen(false);
+                setOpen(false);
+            } else {
+                alert("Failed to update profile image.");
+            }
+        } catch (error) {
+            console.error("Error updating profile image:", error);
+        }
+    };
+
     const suggestions = searchInput.length > 0
         ? allMovies.filter(m =>
             m.name.toLowerCase().includes(searchInput.toLowerCase())
         ).slice(0, 3)
         : []
+
+    const randomShowcaseSMA = useMemo(() => {
+        const shuffled = [...allMovies];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled.slice(0, 7);
+    }, [allMovies]);
 
     return (
         <div className="dashboard-container">
@@ -126,14 +197,45 @@ export default function Dashboard({allMovies, isLoggedIn}){
                         onClick={() => handleJournal()}>Journal</button>
                 <button className={`watchlist-button-header ${activePage === "watchlist" ? "active" : ""}`}
                         onClick={() =>  {handleWatchlist();}}>Watchlist</button>
-                {isLoggedIn && (
-                    <img src ={ProfileIcon} alt= "user_icon" className="user-icon"/>
-                )}
-                {!isLoggedIn && (
+                {isLoggedIn ? (
+                    <img src ={imageUser !== "null" ? imageUser : ProfileIcon} alt= "user_icon" className="user-icon" onClick={()=> setOpen(!open)}/>
+                ) : (
                     <button className="get-started-button" onClick={() => navigate('/login')}>Get Started!</button>
                 )}
+
             </header>
+            {open && (
+                <div className="dropdown">
+                    <button className="dropdown-item profile-action" onClick={()=>setIsImageModalOpen(true)}>Change profile picture</button>
+                    <hr className="dropdown-divider" />
+                    <button className="dropdown-item logout" onClick={()=>handleLogout(user_id)}><IoIosLogOut size={20}/> Logout</button>
+                </div>
+            )}
             {showPopup && triedToChangeTab && <NotLoggedIn onClose={() => setShowPopup(false)}/>}
+            {isImageModalOpen && (
+                <div className="avatar-modal-overlay" onClick={() => setIsImageModalOpen(false)}>
+                    <div className="avatar-modal-content" onClick={(e) => e.stopPropagation()}>
+                        <button className="avatar-modal-close" onClick={() => setIsImageModalOpen(false)} aria-label="Close">
+                            <FiX size={20} />
+                        </button>
+                        <h2>Profile Image</h2>
+                        <p className="avatar-modal-subtitle">Paste the direct link to your new avatar image below.</p>
+                        <form onSubmit={handleUpdateImageSubmit}>
+                            <input
+                                type="url"
+                                className="avatar-link-input"
+                                placeholder="https://example.com/image.jpg"
+                                value={imageUrlInput}
+                                onChange={(e) => setImageUrlInput(e.target.value)}
+                                required
+                            />
+                            <button type="submit" className="avatar-submit-button">
+                                Submit
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            )}
             <div className="dashboard-content">
                 <blockquote className="about-quote">“Knicks in four.”</blockquote>
                 <div className="trivia">
@@ -147,7 +249,7 @@ export default function Dashboard({allMovies, isLoggedIn}){
                     <p className="pop">Popular on Maki</p>
                     <div className="line1"></div>
                     <div className="sma-showcase-grid">
-                        {allMovies.slice(2, 9).map(movie => {
+                        {randomShowcaseSMA.map(movie => {
                                 return (
                                     <img key={movie.id} src={movie.image} alt={movie.name} className="sma-showcase-image"
                                          onClick={() => navigate(`/details/${movie.id}`)}

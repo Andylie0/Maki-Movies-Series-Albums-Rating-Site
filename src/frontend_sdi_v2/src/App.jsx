@@ -57,11 +57,14 @@ export function App() {
                 </div>
             )}
             <Routes>
-                <Route path="/" element={<Dashboard allMovies={allMovies}
+                <Route path="/" element={<Dashboard
+                    allMovies={allMovies}
+                    setIsLoggedIn={setIsLoggedIn}
                     isLoggedIn={isLoggedIn}
                 />}/>
                 <Route path="/journal" element={<Journal
                     allReviews={allReviews}
+                    setIsLoggedIn={setIsLoggedIn}
                     setReviewState={setReviewState}
                     allMovies={allMovies}
                     isOnline={isOnline}
@@ -69,12 +72,14 @@ export function App() {
                 />}/>
                 <Route path="/stats" element={<Stats
                     allReviews={allReviews}
+                    setIsLoggedIn={setIsLoggedIn}
                     allMovies={allMovies}
                 />}/>
                 <Route path="/register" element={<Register/>}/>
                 <Route path="/details/:id" element={<Details
                     allReviews={allReviews}
                     setReviewState={setReviewState}
+                    setIsLoggedIn={setIsLoggedIn}
                     allMovies={allMovies}
                     isOnline={isOnline}
                     addToQueue={addToQueue}
@@ -82,6 +87,7 @@ export function App() {
                 />}/>
                 <Route path="/watchlist" element={<Watchlist
                     allMovies={allMovies}
+                    setIsLoggedIn={setIsLoggedIn}
                 />} />
                 <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn}/>}/>
                 <Route path="/forgot-password" element={<ForgotPassword/>}/>

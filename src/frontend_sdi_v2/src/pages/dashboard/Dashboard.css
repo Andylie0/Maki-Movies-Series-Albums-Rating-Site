@@ -116,6 +116,7 @@ body{
     width: 120px;
     height: 210px;
     cursor: pointer;
+    border-radius: 10px;
 }
 
 
@@ -156,15 +157,14 @@ body{
 
 .not-logged-in{
     z-index:4;
-    position:fixed;
+    position:absolute;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     background-color: rgba(255, 84, 84, 0.76);
     border-radius: 10px;
     padding: 10px;
-    margin-top: 10px;
-    margin-left: 70vw;
+    right:2%;
     font-size: 15px;
     color: white;
     gap: 30px;
@@ -256,6 +256,151 @@ body{
     animation: qs 1s alternate infinite;
     z-index: 1;
 }
+
+.dropdown{
+    z-index: 2;
+    position:absolute;
+    top: 75px;
+    right: 2%;
+    width:220px;
+    background-color: rgba(33,31,99,1);
+    border-radius:10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+    padding: 6px 0;
+    overflow:hidden;
+}
+
+.dropdown-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    padding: 14px 16px;
+    background: none;
+    border: none;
+    color: #e0e0e0;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.profile-action:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ffd700;
+}
+
+.logout:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ff4d4f;
+}
+
+.dropdown-divider {
+    border: none;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 0;
+    width: 100%;
+}
+
+
+.avatar-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.avatar-modal-content {
+    background-color: #211f63;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    width: 100%;
+    max-width: 450px;
+    padding: 2.5rem;
+    position: relative;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    color: white;
+    text-align: center;
+}
+
+.avatar-modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #a0a0a0;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.avatar-modal-close:hover {
+    color: white;
+}
+
+.avatar-modal-content h2 {
+    margin-top: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.avatar-modal-subtitle {
+    color: #b3b3b3;
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+}
+
+.avatar-link-input {
+    width: 100%;
+    padding: 12px 16px;
+    background-color: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    color: white;
+    font-size: 0.95rem;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    transition: border-color 0.2s;
+}
+
+.avatar-link-input:focus {
+    outline: none;
+    border-color: #4a90e2; /* Light blue accent glow on focus */
+}
+
+.avatar-submit-button {
+    width: 100%;
+    padding: 12px;
+    background-color: #4a90e2; /* Sleek button fill */
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.avatar-submit-button:hover {
+    background-color: #357abd;
+}
+
+.avatar-submit-button:active {
+    transform: scale(0.98);
+}
+
 
 @media screen and (max-width: 768px) {
     .trivia {

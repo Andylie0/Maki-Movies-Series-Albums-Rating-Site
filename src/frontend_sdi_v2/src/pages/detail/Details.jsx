@@ -12,15 +12,22 @@ import StarRating from '../../components/StarRating.jsx';
 import { parseRating } from '../../utils/rating.js';
 import { FiSearch, FiX } from 'react-icons/fi';
 import {NotLoggedIn} from "../dashboard/Dashboard.jsx";
+import {IoIosLogOut} from "react-icons/io";
+import '../dashboard/Dashboard.css'
 
 
-export default function Details({ allReviews, setReviewState, allMovies, isOnline, addToQueue,isLoggedIn}) {
+export default function Details({ allReviews, setReviewState, allMovies, isOnline, addToQueue,isLoggedIn, setIsLoggedIn}) {
     const {id} = useParams();
     const [movie, setMovie] = useState(null);
 
-    const storedUser = JSON.parse(localStorage.getItem('user')) || null;
-    const userId = storedUser.id;
+    let userId, imageUser;
+    if(isLoggedIn === true) {
+        const storedUser = JSON.parse(localStorage.getItem('user')) || null;
+        userId = storedUser.id;
+        imageUser = JSON.parse(localStorage.getItem('user'))?.image;
+    }
 
+    const [open, setOpen] = useState(false);
     const navigate = useNavigate();
     const [isWatchlisted, setWatchlisted] = useState(false);
     const [watchlist_id, setId] = useState(null);
@@ -191,7 +198,7 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
         return () => {
             isMounted = false;
         }
-    },[id, userId])
+    },[id])
 
     function revrev(m){
         if (m.numberOfReviews >= 1000) {
@@ -418,6 +425,27 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
         }
     }
 
+    async function handleLogout(){
+        try {
+            const response = await fetch(`${BASE_URL}/auth/logout/`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+            });
+            if (response.ok) {
+                localStorage.removeItem('user');
+                navigate('/');
+                setIsLoggedIn(false);
+                setOpen(false);
+            } else {
+                console.error('Logout failed on server:', response.statusText);
+                alert('Failed to log out. Please try again.');
+            }
+        } catch (error) {
+            console.error('Network error during logout:', error);
+        }
+    }
+
     return(
         <div className="details">
 
@@ -455,19 +483,30 @@ export default function Details({ allReviews, setReviewState, allMovies, isOnlin
                 <button className={`watchlist-button-header ${activePage === "watchlist" ? "active" : ""}`}
                         onClick={() => handleWatchlist()}>Watchlist</button>
                 {isLoggedIn ? (
-                    <img src ={ProfileIcon} alt= "user_icon" className="user-icon"/>
+                    <img src ={imageUser !== "null" ? imageUser : ProfileIcon} alt= "user_icon" className="user-icon" onClick={() => setOpen(!open)}/>
                 ) : (
                     <button className="get-started-button" onClick={() => navigate('/login')}>Get Started!</button>
                 )}
 
             </header>
 
+            {open && (
+                <div className="dropdown">
+                    <button className="dropdown-item profile-action">Change profile picture!</button>
+                    <hr className="dropdown-divider" />
+                    <button className="dropdown-item logout" onClick ={()=>handleLogout()}><IoIosLogOut size={20}/> Logout!</button>
+                </div>
+            )}
             <main>
                 {showPopUp && triedToChangeTab && <NotLoggedIn onClose={() => setShowPopUp(false)}/>}
                 <div className="movie-details">
                     <div className = "poster">
                         <img src={movie.image} alt={movie.name}/>
-                        <p className = "details-duration">Duration: {movie.duration} min</p>
+                        {(movie.type === "Series") ? (
+                            <p className = "details-duration">Number of episodes: {movie.duration} episodes</p>
+                            ) : (
+                                <p className = "details-duration">Duration: {movie.duration} min</p>
+                        )}
                     </div>
                     <div className = "movie-info2">
                         <h1>{movie.name}</h1>

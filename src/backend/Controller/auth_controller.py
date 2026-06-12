@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, Response, Request
+from fastapi import APIRouter, Depends, Response, Request, Query
 from sqlalchemy.orm import Session
 from Service.auth_service import AuthService
 from database import get_db
@@ -23,6 +23,10 @@ async def login(data: dict, response: Response, service: AuthService = Depends(g
 @router.post("/logout")
 async def logout(request: Request, response: Response, service: AuthService = Depends(get_auth_service)):
     return await service.logout_user(request, response)
+
+@router.put("/change-picture")
+async def change_picture(data:dict, user_id : int = Query(...), service: AuthService = Depends(get_auth_service)):
+    return await service.update_user_image(data,user_id)
 
 @router.post("/forgot-password")
 async def forgot_password(data: dict, service: AuthService = Depends(get_auth_service)):

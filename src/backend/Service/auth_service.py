@@ -97,6 +97,19 @@ class AuthService:
         except jwt.PyJWTError:
             raise HTTPException(status_code=400, detail="Invalid or altered reset token")
 
+    async def update_user_image(self, data: dict, user_id: int) -> dict:
+        image = data.get("image")
+        if not image:
+            raise HTTPException(status_code=400, detail="Image URL is required")
+
+        user = self.user_repo.get_by_id(user_id)
+        if not user:
+            raise HTTPException(status_code=404, detail="User not found")
+
+        user.image = image
+        self.user_repo.update(user)
+        return {"message": "Image updated successfully", "image": user.image}
+
     async def _generate_session_response(self, user: UserModel, response: Response) -> dict:
         token_payload = {"id": user.id, "username": user.username, "role": user.role}
         token = create_access_token(token_payload)

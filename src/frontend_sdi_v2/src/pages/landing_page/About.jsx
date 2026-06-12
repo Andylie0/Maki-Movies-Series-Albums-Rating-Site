@@ -12,6 +12,11 @@ export default function About() {
                     An easy to use app, where the user has a special place
                     to rate their favourite movies/series/albums.
                 </p>
+                <br/>
+                <p className="about-text">
+                    Special thanks to Eliza for helping me with the data propagation and my
+                    lab teacher Tibi for design advices!
+                </p>
             </main>
         </div>
     )

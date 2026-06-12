@@ -8,17 +8,22 @@ import {BarChart, Bar, XAxis, YAxis, Tooltip, PieChart, Pie, Cell, Legend } from
 import Cookie from "js-cookie";
 import { ResponsiveContainer } from 'recharts'
 import {BASE_URL} from "../../config.js";
+import {IoIosLogOut} from "react-icons/io";
 
 const ALL_RATINGS = [0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5];
 
-export default function Statistics({allReviews, allMovies}) {
+export default function Statistics({allReviews, allMovies, setIsLoggedIn}) {
     const nav = useNavigate();
     const [activePage, setActivePage] = useState("journal")
     const [activeTab, setActiveTab] = useState(Cookie.get("activeTab") || "stats")
     const [searchInput, setSearchInput] = useState("");
 
+
     const storedUser = JSON.parse(localStorage.getItem('user'));
     const userId = storedUser?.id;
+    const imageUser = JSON.parse(localStorage.getItem('user'))?.image;
+
+    const [open, setOpen] = useState(false);
 
     //State for server-calculated statistics
     const [statsData, setStatsData] = useState({
@@ -92,6 +97,27 @@ export default function Statistics({allReviews, allMovies}) {
         ).slice(0, 3)
         : []
 
+    async function handleLogout(){
+        try {
+            const response = await fetch(`${BASE_URL}/auth/logout/`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include',
+            });
+            if (response.ok) {
+                localStorage.removeItem('user');
+                setIsLoggedIn(false);
+                nav('/');
+                setOpen(false);
+            } else {
+                console.error('Logout failed on server:', response.statusText);
+                alert('Failed to log out. Please try again.');
+            }
+        } catch (error) {
+            console.error('Network error during logout:', error);
+        }
+    }
+
     return(
         <div className="stats">
             <ParticlesBackground colour="#EB4144"/>
@@ -126,9 +152,16 @@ export default function Statistics({allReviews, allMovies}) {
                         onClick={() => setActivePage("journal")}>Journal</button>
                 <button className={`watchlist-button-header ${activePage === "watchlist" ? "active" : ""}`}
                         onClick={() => {setActivePage("watchlist"); nav('/watchlist'); } }>Watchlist</button>
-                <img src ={ProfileIcon} alt= "user_icon" className="user-icon"/>
+                <img src ={imageUser !== "null" ? imageUser : ProfileIcon} alt= "user_icon" className="user-icon" onClick={()=>setOpen(!open)}/>
             </header>
 
+            {open && (
+                <div className="dropdown">
+                    <button className="dropdown-item profile-action">Change profile picture!</button>
+                    <hr className="dropdown-divider" />
+                    <button className="dropdown-item logout"><IoIosLogOut size={20} onClick ={()=>handleLogout()}/> Logout!</button>
+                </div>
+            )}
             <main>
                 <div className="button-section">
                     <button className={`table-button ${activeTab === "table" ? "active" : ""}`}
